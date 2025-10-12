@@ -3,12 +3,10 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
 
 import accessRoutes from './routes/access';
 import adminRoutes from './routes/admin';
 import webRoutes from './routes/web';
-import cdcRoutes from './routes/cdc';
 
 // Carregar variáveis de ambiente
 dotenv.config();
@@ -35,7 +33,6 @@ app.use('/api/', limiter);
 // Middleware para parsing
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 // Trust proxy para obter IP real (importante para Railway)
 app.set('trust proxy', 1);
@@ -44,7 +41,6 @@ app.set('trust proxy', 1);
 app.use('/', webRoutes);
 app.use('/api/access', accessRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/cdc', cdcRoutes);
 
 // Rota de saúde
 app.get('/api/health', (req, res) => {
