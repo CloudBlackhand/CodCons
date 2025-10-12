@@ -417,14 +417,8 @@ router.post('/admin', (req, res) => {
   const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
 
   if (password === adminPassword) {
-    // Criar token simples (base64 da senha) para persistir sessão
-    const token = Buffer.from(password).toString('base64');
-    res.cookie('admin_token', token, { 
-      httpOnly: true, 
-      maxAge: 24 * 60 * 60 * 1000, // 24 horas
-      sameSite: 'lax'
-    });
-    res.redirect('/admin');
+    // Redireciona com senha no query string para autenticação temporária
+    res.redirect(`/admin?auth=${encodeURIComponent(password)}`);
   } else {
     res.status(401).send(`
       <script>
