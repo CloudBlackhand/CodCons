@@ -1,0 +1,6 @@
+NODE_ENV=production
+ADMIN_PASSWORD=Admin@CDC2024!Forte
+JWT_SECRET=cdc-qrcode-sistema-seguro-railway-2024-chave-secreta-jwt-minimo-32-caracteres
+PORT=3000
+BASE_URL=https://dedasys-production.up.railway.app
+
