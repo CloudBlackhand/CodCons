@@ -262,41 +262,39 @@ router.get('/admin', optionalAuth, async (req, res) => {
 
                   <div id="qrCodesList">
                       ${qrCodes.map(qr => {
-                        const baseUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
-                        const cdcUrl = `${baseUrl}/cdc?token=${qr.code}`;
-                        return \`
-                          <div class="qr-card">
-                              <strong>\${qr.name}</strong>
-                              <span class="status \${qr.isActive ? 'active' : 'inactive'}">
-                                  \${qr.isActive ? 'Ativo' : 'Inativo'}
-                              </span>
-                              <div style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
-                                  \${qr.description || 'Sem descrição'}
-                              </div>
-                              <div style="margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 5px; font-family: monospace; font-size: 0.75rem; word-break: break-all;">
-                                  <strong>URL CDC:</strong><br/>
-                                  <a href="${cdcUrl}" target="_blank" style="color: #667eea;">${cdcUrl}</a>
-                              </div>
-                              <div style="margin-top: 10px;">
-                                  <button class="btn btn-primary" onclick="window.open('${cdcUrl}', '_blank')" style="background: #4CAF50;">
-                                      🔗 Testar Acesso
-                                  </button>
-                                  <button class="btn btn-warning" onclick="toggleStatus('\${qr.id}')">
-                                      \${qr.isActive ? 'Desativar' : 'Ativar'}
-                                  </button>
-                                  <button class="btn btn-primary" onclick="generateImage('\${qr.id}')">
-                                      Gerar Imagem
-                                  </button>
-                                  <button class="btn btn-danger" onclick="deleteQRCode('\${qr.id}')">
-                                      Deletar
-                                  </button>
-                              </div>
-                              <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
-                                  Usado \${qr.useCount} vezes | Criado: \${new Date(qr.createdAt).toLocaleDateString('pt-BR')}
-                                  \${qr.lastUsed ? \` | Último uso: \${new Date(qr.lastUsed).toLocaleDateString('pt-BR')}\` : ''}
-                              </div>
-                          </div>
-                        \`;
+                        const baseUrl = process.env.BASE_URL || 'http://localhost:' + (process.env.PORT || 3000);
+                        const cdcUrl = baseUrl + '/cdc?token=' + qr.code;
+                        return '<div class="qr-card">' +
+                              '<strong>' + qr.name + '</strong>' +
+                              '<span class="status ' + (qr.isActive ? 'active' : 'inactive') + '">' +
+                                  (qr.isActive ? 'Ativo' : 'Inativo') +
+                              '</span>' +
+                              '<div style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">' +
+                                  (qr.description || 'Sem descrição') +
+                              '</div>' +
+                              '<div style="margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 5px; font-family: monospace; font-size: 0.75rem; word-break: break-all;">' +
+                                  '<strong>URL CDC:</strong><br/>' +
+                                  '<a href="' + cdcUrl + '" target="_blank" style="color: #667eea;">' + cdcUrl + '</a>' +
+                              '</div>' +
+                              '<div style="margin-top: 10px;">' +
+                                  '<button class="btn btn-primary" onclick="window.open(\'' + cdcUrl + '\', \'_blank\')" style="background: #4CAF50;">' +
+                                      '🔗 Testar Acesso' +
+                                  '</button>' +
+                                  '<button class="btn btn-warning" onclick="toggleStatus(\'' + qr.id + '\')">' +
+                                      (qr.isActive ? 'Desativar' : 'Ativar') +
+                                  '</button>' +
+                                  '<button class="btn btn-primary" onclick="generateImage(\'' + qr.id + '\')">' +
+                                      'Gerar Imagem' +
+                                  '</button>' +
+                                  '<button class="btn btn-danger" onclick="deleteQRCode(\'' + qr.id + '\')">' +
+                                      'Deletar' +
+                                  '</button>' +
+                              '</div>' +
+                              '<div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">' +
+                                  'Usado ' + qr.useCount + ' vezes | Criado: ' + new Date(qr.createdAt).toLocaleDateString('pt-BR') +
+                                  (qr.lastUsed ? ' | Último uso: ' + new Date(qr.lastUsed).toLocaleDateString('pt-BR') : '') +
+                              '</div>' +
+                          '</div>';
                       }).join('')}
                   </div>
               </div>
