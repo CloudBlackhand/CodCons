@@ -4,6 +4,11 @@ import { cdcData, cdcTitulos } from '../data/cdc-data';
 
 const router = express.Router();
 
+// Rota de teste simples
+router.get('/test', (req, res) => {
+  res.send('<h1>CDC TESTE FUNCIONANDO!</h1><p>Se você vê isso, a rota CDC está funcionando!</p>');
+});
+
 router.get('/', validateToken, (req, res) => {
   res.send(generateCDCPage());
 });
