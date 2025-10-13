@@ -257,7 +257,7 @@ router.get('/admin', optionalAuth, async (req, res) => {
                       <label>Novo QR Code:</label>
                       <input type="text" id="qrName" placeholder="Nome do QR Code">
                       <input type="text" id="qrDescription" placeholder="Descrição (opcional)">
-                      <button class="btn btn-primary" onclick="createQRCode()">Criar QR Code</button>
+                      <button class="btn btn-primary" id="createQRBtn">Criar QR Code</button>
                   </div>
 
                   <div id="qrCodesList">
@@ -277,16 +277,16 @@ router.get('/admin', optionalAuth, async (req, res) => {
                                   '<a href="' + cdcUrl + '" target="_blank" style="color: #667eea;">' + cdcUrl + '</a>' +
                               '</div>' +
                               '<div style="margin-top: 10px;">' +
-                                  '<button class="btn btn-primary" onclick="window.open(\'' + cdcUrl + '\', \'_blank\')" style="background: #4CAF50;">' +
+                                  '<button class="btn btn-primary test-access-btn" data-url="' + cdcUrl + '" style="background: #4CAF50;">' +
                                       '🔗 Testar Acesso' +
                                   '</button>' +
-                                  '<button class="btn btn-warning" onclick="toggleStatus(\'' + qr.id + '\')">' +
+                                  '<button class="btn btn-warning toggle-status-btn" data-qr-id="' + qr.id + '">' +
                                       (qr.isActive ? 'Desativar' : 'Ativar') +
                                   '</button>' +
-                                  '<button class="btn btn-primary" onclick="generateImage(\'' + qr.id + '\')">' +
+                                  '<button class="btn btn-primary generate-image-btn" data-qr-id="' + qr.id + '">' +
                                       'Gerar Imagem' +
                                   '</button>' +
-                                  '<button class="btn btn-danger" onclick="deleteQRCode(\'' + qr.id + '\')">' +
+                                  '<button class="btn btn-danger delete-qr-btn" data-qr-id="' + qr.id + '">' +
                                       'Deletar' +
                                   '</button>' +
                               '</div>' +
@@ -301,105 +301,126 @@ router.get('/admin', optionalAuth, async (req, res) => {
           </div>
 
           <script>
-              async function createQRCode() {
-                  const name = document.getElementById('qrName').value;
-                  const description = document.getElementById('qrDescription').value;
+              // Aguardar DOM carregar
+              document.addEventListener('DOMContentLoaded', function() {
                   
-                  if (!name) {
-                      alert('Nome é obrigatório!');
-                      return;
-                  }
+                  // Botão criar QR Code
+                  const createBtn = document.getElementById('createQRBtn');
+                  if (createBtn) {
+                      createBtn.addEventListener('click', async function() {
+                          const name = document.getElementById('qrName').value;
+                          const description = document.getElementById('qrDescription').value;
+                          
+                          if (!name) {
+                              alert('Nome é obrigatório!');
+                              return;
+                          }
 
-                  try {
-                      const response = await fetch('/api/admin/qr-codes', {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json'
-                          },
-                          body: JSON.stringify({ name, description })
-                      });
+                          try {
+                              const response = await fetch('/api/admin/qr-codes', {
+                                  method: 'POST',
+                                  headers: {
+                                      'Content-Type': 'application/json'
+                                  },
+                                  body: JSON.stringify({ name, description })
+                              });
 
-                      if (response.ok) {
-                          location.reload();
-                      } else {
-                          alert('Erro ao criar QR Code');
-                      }
-                  } catch (error) {
-                      alert('Erro ao criar QR Code');
-                  }
-              }
-
-              async function toggleStatus(id) {
-                  try {
-                      const response = await fetch(\`/api/admin/qr-codes/\${id}/toggle\`, {
-                          method: 'PATCH',
-                          headers: {
-                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
+                              if (response.ok) {
+                                  location.reload();
+                              } else {
+                                  alert('Erro ao criar QR Code');
+                              }
+                          } catch (error) {
+                              alert('Erro ao criar QR Code');
                           }
                       });
-
-                      if (response.ok) {
-                          location.reload();
-                      } else {
-                          alert('Erro ao alterar status');
-                      }
-                  } catch (error) {
-                      alert('Erro ao alterar status');
-                  }
-              }
-
-              async function deleteQRCode(id) {
-                  if (!confirm('Tem certeza que deseja deletar este QR Code?')) {
-                      return;
                   }
 
-                  try {
-                      const response = await fetch(\`/api/admin/qr-codes/\${id}\`, {
-                          method: 'DELETE',
-                          headers: {
-                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
+                  // Botões de teste de acesso
+                  document.querySelectorAll('.test-access-btn').forEach(btn => {
+                      btn.addEventListener('click', function() {
+                          const url = this.getAttribute('data-url');
+                          window.open(url, '_blank');
+                      });
+                  });
+
+                  // Botões de toggle status
+                  document.querySelectorAll('.toggle-status-btn').forEach(btn => {
+                      btn.addEventListener('click', async function() {
+                          const id = this.getAttribute('data-qr-id');
+                          
+                          try {
+                              const response = await fetch(\`/api/admin/qr-codes/\${id}/toggle\`, {
+                                  method: 'PATCH'
+                              });
+
+                              if (response.ok) {
+                                  location.reload();
+                              } else {
+                                  alert('Erro ao alterar status');
+                              }
+                          } catch (error) {
+                              alert('Erro ao alterar status');
                           }
                       });
+                  });
 
-                      if (response.ok) {
-                          location.reload();
-                      } else {
-                          alert('Erro ao deletar QR Code');
-                      }
-                  } catch (error) {
-                      alert('Erro ao deletar QR Code');
-                  }
-              }
+                  // Botões de deletar
+                  document.querySelectorAll('.delete-qr-btn').forEach(btn => {
+                      btn.addEventListener('click', async function() {
+                          const id = this.getAttribute('data-qr-id');
+                          
+                          if (!confirm('Tem certeza que deseja deletar este QR Code?')) {
+                              return;
+                          }
 
-              async function generateImage(id) {
-                  try {
-                      const response = await fetch(\`/api/admin/qr-codes/\${id}/image\`, {
-                          headers: {
-                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
+                          try {
+                              const response = await fetch(\`/api/admin/qr-codes/\${id}\`, {
+                                  method: 'DELETE'
+                              });
+
+                              if (response.ok) {
+                                  location.reload();
+                              } else {
+                                  alert('Erro ao deletar QR Code');
+                              }
+                          } catch (error) {
+                              alert('Erro ao deletar QR Code');
                           }
                       });
+                  });
 
-                      if (response.ok) {
-                          const data = await response.json();
-                          const newWindow = window.open();
-                          newWindow.document.write(\`
-                              <html>
-                                  <head><title>QR Code - \${data.data.qrCodeId}</title></head>
-                                  <body style="text-align: center; padding: 20px;">
-                                      <h1>QR Code</h1>
-                                      <img src="\${data.data.image}" style="max-width: 100%; border: 2px solid #ccc; border-radius: 10px;">
-                                      <br><br>
-                                      <button onclick="window.print()">Imprimir</button>
-                                  </body>
-                              </html>
-                          \`);
-                      } else {
-                          alert('Erro ao gerar imagem');
-                      }
-                  } catch (error) {
-                      alert('Erro ao gerar imagem');
-                  }
-              }
+                  // Botões de gerar imagem
+                  document.querySelectorAll('.generate-image-btn').forEach(btn => {
+                      btn.addEventListener('click', async function() {
+                          const id = this.getAttribute('data-qr-id');
+                          
+                          try {
+                              const response = await fetch(\`/api/admin/qr-codes/\${id}/image\`);
+
+                              if (response.ok) {
+                                  const data = await response.json();
+                                  const newWindow = window.open();
+                                  newWindow.document.write(\`
+                                      <html>
+                                          <head><title>QR Code - \${data.data.qrCodeId}</title></head>
+                                          <body style="text-align: center; padding: 20px;">
+                                              <h1>QR Code</h1>
+                                              <img src="\${data.data.image}" style="max-width: 100%; border: 2px solid #ccc; border-radius: 10px;">
+                                              <br><br>
+                                              <button onclick="window.print()">Imprimir</button>
+                                          </body>
+                                      </html>
+                                  \`);
+                              } else {
+                                  alert('Erro ao gerar imagem');
+                              }
+                          } catch (error) {
+                              alert('Erro ao gerar imagem');
+                          }
+                      });
+                  });
+              });
           </script>
       </body>
       </html>
