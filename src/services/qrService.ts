@@ -48,8 +48,7 @@ export class QRCodeService {
   }
 
   async validateAccess(code: string): Promise<{ valid: boolean; qrCode?: QRCodeType }> {
-    const qrCodes = await database.getAllQRCodes();
-    const qrCode = qrCodes.find(qr => qr.code === code);
+    const qrCode = await database.getQRCodeByCode(code);
 
     if (!qrCode) {
       return { valid: false };
