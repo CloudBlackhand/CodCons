@@ -314,8 +314,7 @@ router.get('/admin', optionalAuth, async (req, res) => {
                       const response = await fetch('/api/admin/qr-codes', {
                           method: 'POST',
                           headers: {
-                              'Content-Type': 'application/json',
-                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
+                              'Content-Type': 'application/json'
                           },
                           body: JSON.stringify({ name, description })
                       });
