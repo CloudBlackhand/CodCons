@@ -320,7 +320,8 @@ router.get('/admin', optionalAuth, async (req, res) => {
                               const response = await fetch('/api/admin/qr-codes', {
                                   method: 'POST',
                                   headers: {
-                                      'Content-Type': 'application/json'
+                                      'Content-Type': 'application/json',
+                                      'Authorization': 'Bearer Admin@CDC2024!Forte'
                                   },
                                   body: JSON.stringify({ name, description })
                               });
@@ -351,7 +352,10 @@ router.get('/admin', optionalAuth, async (req, res) => {
                           
                           try {
                               const response = await fetch(\`/api/admin/qr-codes/\${id}/toggle\`, {
-                                  method: 'PATCH'
+                                  method: 'PATCH',
+                                  headers: {
+                                      'Authorization': 'Bearer Admin@CDC2024!Forte'
+                                  }
                               });
 
                               if (response.ok) {
@@ -376,7 +380,10 @@ router.get('/admin', optionalAuth, async (req, res) => {
 
                           try {
                               const response = await fetch(\`/api/admin/qr-codes/\${id}\`, {
-                                  method: 'DELETE'
+                                  method: 'DELETE',
+                                  headers: {
+                                      'Authorization': 'Bearer Admin@CDC2024!Forte'
+                                  }
                               });
 
                               if (response.ok) {
@@ -396,7 +403,11 @@ router.get('/admin', optionalAuth, async (req, res) => {
                           const id = this.getAttribute('data-qr-id');
                           
                           try {
-                              const response = await fetch(\`/api/admin/qr-codes/\${id}/image\`);
+                              const response = await fetch(\`/api/admin/qr-codes/\${id}/image\`, {
+                                  headers: {
+                                      'Authorization': 'Bearer Admin@CDC2024!Forte'
+                                  }
+                              });
 
                               if (response.ok) {
                                   const data = await response.json();
