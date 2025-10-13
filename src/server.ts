@@ -41,29 +41,14 @@ app.use(helmet({
   referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
 }));
 
-// CORS configurado para produção
-const allowedOrigins = NODE_ENV === 'production' 
-  ? [BASE_URL, BASE_URL.replace('https://', 'http://')]
-  : '*';
-
-const corsOptions = {
-  origin: (origin: any, callback: any) => {
-    if (NODE_ENV === 'development') {
-      callback(null, true);
-      return;
-    }
-    
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Origem não permitida pelo CORS'));
-    }
-  },
+// CORS temporariamente liberado para funcionar
+app.use(cors({
+  origin: '*', // Permitir todas as origens temporariamente
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+}));
 
 // Rate limiting agressivo para produção
 const apiLimiter = rateLimit({
