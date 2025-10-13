@@ -93,9 +93,10 @@ const cdcLimiter = rateLimit({
   }
 });
 
-app.use('/api/', apiLimiter);
-app.use('/admin', adminLimiter);
-app.use('/cdc', cdcLimiter);
+// Rate limiting TEMPORARIAMENTE DESABILITADO
+// app.use('/api/', apiLimiter);
+// app.use('/admin', adminLimiter);
+// app.use('/cdc', cdcLimiter);
 
 // Middleware para parsing com limite de tamanho
 app.use(express.json({ limit: '1mb' }));
