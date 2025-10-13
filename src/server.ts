@@ -18,27 +18,36 @@ const PORT = process.env.PORT || 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-// Middleware de segurança avançado para produção
+// Middleware de segurança TEMPORARIAMENTE DESABILITADO para resolver CSP
+// app.use(helmet({
+//   contentSecurityPolicy: {
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+//       fontSrc: ["'self'", "https://fonts.gstatic.com"],
+//       imgSrc: ["'self'", "data:", "https:"],
+//       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-hashes'"],
+//       connectSrc: ["'self'"]
+//     }
+//   },
+//   hsts: {
+//     maxAge: 31536000,
+//     includeSubDomains: true,
+//     preload: true
+//   },
+//   frameguard: { action: 'deny' },
+//   noSniff: true,
+//   xssFilter: true,
+//   referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
+// }));
+
+// Helmet básico SEM CSP por enquanto
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-hashes'"],
-      connectSrc: ["'self'"]
-    }
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true
-  },
+  hsts: false, // Desabilitar HSTS temporariamente
+  contentSecurityPolicy: false, // DESABILITAR CSP COMPLETAMENTE
   frameguard: { action: 'deny' },
   noSniff: true,
-  xssFilter: true,
-  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
+  xssFilter: true
 }));
 
 // CORS temporariamente liberado para funcionar
