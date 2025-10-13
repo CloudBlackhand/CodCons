@@ -301,10 +301,6 @@ router.get('/admin', optionalAuth, async (req, res) => {
           </div>
 
           <script>
-              // Pega senha do query parameter
-              const urlParams = new URLSearchParams(window.location.search);
-              const authPassword = urlParams.get('auth') || '';
-              
               async function createQRCode() {
                   const name = document.getElementById('qrName').value;
                   const description = document.getElementById('qrDescription').value;
@@ -319,7 +315,7 @@ router.get('/admin', optionalAuth, async (req, res) => {
                           method: 'POST',
                           headers: {
                               'Content-Type': 'application/json',
-                              'Authorization': 'Bearer ' + authPassword
+                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
                           },
                           body: JSON.stringify({ name, description })
                       });
@@ -327,20 +323,19 @@ router.get('/admin', optionalAuth, async (req, res) => {
                       if (response.ok) {
                           location.reload();
                       } else {
-                          const error = await response.json();
-                          alert('Erro ao criar QR Code: ' + (error.message || 'Erro desconhecido'));
+                          alert('Erro ao criar QR Code');
                       }
                   } catch (error) {
-                      alert('Erro ao criar QR Code: ' + error.message);
+                      alert('Erro ao criar QR Code');
                   }
               }
 
               async function toggleStatus(id) {
                   try {
-                      const response = await fetch('/api/admin/qr-codes/' + id + '/toggle', {
+                      const response = await fetch(\`/api/admin/qr-codes/\${id}/toggle\`, {
                           method: 'PATCH',
                           headers: {
-                              'Authorization': 'Bearer ' + authPassword
+                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
                           }
                       });
 
@@ -360,10 +355,10 @@ router.get('/admin', optionalAuth, async (req, res) => {
                   }
 
                   try {
-                      const response = await fetch('/api/admin/qr-codes/' + id, {
+                      const response = await fetch(\`/api/admin/qr-codes/\${id}\`, {
                           method: 'DELETE',
                           headers: {
-                              'Authorization': 'Bearer ' + authPassword
+                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
                           }
                       });
 
@@ -379,16 +374,26 @@ router.get('/admin', optionalAuth, async (req, res) => {
 
               async function generateImage(id) {
                   try {
-                      const response = await fetch('/api/admin/qr-codes/' + id + '/image', {
+                      const response = await fetch(\`/api/admin/qr-codes/\${id}/image\`, {
                           headers: {
-                              'Authorization': 'Bearer ' + authPassword
+                              'Authorization': 'Bearer ${process.env.ADMIN_PASSWORD || 'admin123'}'
                           }
                       });
 
                       if (response.ok) {
                           const data = await response.json();
                           const newWindow = window.open();
-                          newWindow.document.write('<html><head><title>QR Code - ' + data.data.qrCodeId + '</title></head><body style="text-align: center; padding: 20px;"><h1>QR Code</h1><img src="' + data.data.image + '" style="max-width: 100%; border: 2px solid #ccc; border-radius: 10px;"><br><br><button onclick="window.print()">Imprimir</button></body></html>');
+                          newWindow.document.write(\`
+                              <html>
+                                  <head><title>QR Code - \${data.data.qrCodeId}</title></head>
+                                  <body style="text-align: center; padding: 20px;">
+                                      <h1>QR Code</h1>
+                                      <img src="\${data.data.image}" style="max-width: 100%; border: 2px solid #ccc; border-radius: 10px;">
+                                      <br><br>
+                                      <button onclick="window.print()">Imprimir</button>
+                                  </body>
+                              </html>
+                          \`);
                       } else {
                           alert('Erro ao gerar imagem');
                       }

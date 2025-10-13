@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import accessRoutes from './routes/access';
 import adminRoutes from './routes/admin';
 import webRoutes from './routes/web';
+import cdcRoutes from './routes/cdc';
+import { database } from './database';
 
 // Carregar variáveis de ambiente
 dotenv.config();
@@ -41,6 +43,7 @@ app.set('trust proxy', 1);
 app.use('/', webRoutes);
 app.use('/api/access', accessRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/cdc', cdcRoutes);
 
 // Rota de saúde
 app.get('/api/health', (req, res) => {
@@ -73,18 +76,40 @@ app.use('*', (req, res) => {
   });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
-  console.log(`📱 Sistema de QR Code ativo`);
-  console.log(`🔐 Painel admin: http://localhost:${PORT}/admin`);
-  console.log(`📊 API Health: http://localhost:${PORT}/api/health`);
-  
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`\n🔧 Modo desenvolvimento ativo`);
-    console.log(`🔑 Senha admin padrão: ${process.env.ADMIN_PASSWORD || 'admin123'}`);
+// Iniciar servidor com banco de dados
+async function startServer() {
+  try {
+    // Inicializar banco de dados
+    console.log('🔄 Inicializando banco de dados PostgreSQL...');
+    await database.initialize();
+    
+    // Iniciar servidor
+    app.listen(PORT, () => {
+      console.log('\n' + '='.repeat(60));
+      console.log('🚀 Servidor CDC com QR Code iniciado com sucesso!');
+      console.log('='.repeat(60));
+      console.log(`📍 Porta: ${PORT}`);
+      console.log(`🌍 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`⚖️  Site CDC: http://localhost:${PORT}/cdc?token=SEU_TOKEN`);
+      console.log(`🔐 Painel Admin: http://localhost:${PORT}/admin`);
+      console.log(`📊 Health: http://localhost:${PORT}/api/health`);
+      console.log(`🗄️  Banco: PostgreSQL conectado`);
+      
+      if (process.env.NODE_ENV === 'development') {
+        console.log('\n🔧 Modo Desenvolvimento:');
+        console.log(`   🔑 Senha admin: ${process.env.ADMIN_PASSWORD || 'admin123'}`);
+      }
+      
+      console.log('='.repeat(60) + '\n');
+    });
+  } catch (error) {
+    console.error('❌ Erro ao iniciar servidor:', error);
+    process.exit(1);
   }
-});
+}
+
+// Iniciar
+startServer();
 
 export default app;
 
