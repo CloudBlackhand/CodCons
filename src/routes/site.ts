@@ -9,12 +9,12 @@ router.get('/', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../../public/site/index.html'));
 });
 
-// GET /api/site/status - Verificar status da sessão (usado pelo frontend)
-router.get('/status', async (req: Request, res: Response) => {
+// GET /api/site/verify/:token - Verificar status da sessão (usado pelo frontend)
+router.get('/verify/:token', async (req: Request, res: Response) => {
   try {
-    const { session } = req.query;
+    const { token } = req.params;
 
-    if (!session || typeof session !== 'string') {
+    if (!token) {
       return res.status(401).json({
         success: false,
         error: 'Token de sessão não fornecido',
@@ -22,7 +22,7 @@ router.get('/status', async (req: Request, res: Response) => {
       });
     }
 
-    const sessionData = await SessionService.validateSession(session);
+    const sessionData = await SessionService.validateSession(token);
 
     if (!sessionData) {
       return res.status(401).json({

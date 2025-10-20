@@ -35,8 +35,8 @@ class CDCApp {
       const response = await fetch(`/api/site/verify/${this.sessionToken}`);
       const data = await response.json();
       
-      if (data.valid) {
-        this.sessionExpiry = new Date(data.expires_at);
+      if (data.success && data.data && data.data.valid) {
+        this.sessionExpiry = new Date(data.data.expires_at);
         this.startSessionTimer();
         this.showContent();
       } else {

@@ -24,7 +24,7 @@ router.get('/scan/:code', async (req: Request, res: Response) => {
 
     // Redirecionar para o site com token de sessão
     const siteUrl = process.env.SITE_URL || 'http://localhost:3000/site';
-    const redirectUrl = `${siteUrl}?session=${session.token}`;
+    const redirectUrl = `${siteUrl}?token=${session.token}`;
 
     res.redirect(redirectUrl);
   } catch (error) {
