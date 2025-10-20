@@ -68,16 +68,6 @@ function App() {
                 📱 QR Codes
               </a>
             </li>
-            <li>
-              <a href="#">
-                📊 Estatísticas
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                ⚙️ Configurações
-              </a>
-            </li>
           </ul>
         </nav>
       </div>
