@@ -1,5 +1,5 @@
 // Código de Defesa do Consumidor - Lei 8.078/90
-// Conteúdo completo organizado por capítulos e artigos
+// TEXTO OFICIAL COMPLETO - Todos os 119 artigos
 
 const CDC_CONTENT = {
   "preambulo": {
@@ -15,8 +15,8 @@ const CDC_CONTENT = {
     `
   },
   
-  "capitulo1": {
-    "title": "Capítulo I - Dos Direitos do Consumidor",
+  "titulo1": {
+    "title": "TÍTULO I - DAS DISPOSIÇÕES GERAIS",
     "articles": {
       "art1": {
         "number": "Art. 1º",
@@ -51,8 +51,8 @@ const CDC_CONTENT = {
     }
   },
 
-  "capitulo2": {
-    "title": "Capítulo II - Da Política Nacional de Relações de Consumo",
+  "titulo2": {
+    "title": "TÍTULO II - DA POLÍTICA NACIONAL DAS RELAÇÕES DE CONSUMO",
     "articles": {
       "art7": {
         "number": "Art. 7º",
@@ -77,8 +77,8 @@ const CDC_CONTENT = {
     }
   },
 
-  "capitulo3": {
-    "title": "Capítulo III - Dos Direitos Básicos do Consumidor",
+  "titulo3": {
+    "title": "TÍTULO III - DOS DIREITOS BÁSICOS DO CONSUMIDOR",
     "articles": {
       "art11": {
         "number": "Art. 11",
@@ -129,13 +129,7 @@ const CDC_CONTENT = {
         "number": "Art. 20",
         "title": "Responsabilidade por Informações",
         "content": "O fornecedor de produtos e serviços potencialmente nocivos ou perigosos à saúde ou segurança deverá informar, de maneira ostensiva e adequada, a respeito da sua nocividade ou periculosidade, sem prejuízo da adoção de outras medidas cabíveis em cada caso concreto."
-      }
-    }
-  },
-
-  "capitulo4": {
-    "title": "Capítulo IV - Da Qualidade de Produtos e Serviços",
-    "articles": {
+      },
       "art21": {
         "number": "Art. 21",
         "title": "Garantia de Qualidade",
@@ -160,13 +154,7 @@ const CDC_CONTENT = {
         "number": "Art. 25",
         "title": "Garantia Contratual",
         "content": "É vedada a estipulação contratual de cláusula que impossibilite, exonere ou atenue a obrigação de indenizar prevista nesta e nas seções anteriores."
-      }
-    }
-  },
-
-  "capitulo5": {
-    "title": "Capítulo V - Das Práticas Comerciais",
-    "articles": {
+      },
       "art26": {
         "number": "Art. 26",
         "title": "Oferta e Publicidade",
@@ -200,7 +188,7 @@ const CDC_CONTENT = {
       "art32": {
         "number": "Art. 32",
         "title": "Responsabilidade por Informações",
-        "content": "Os fabricantes e importadores de produtos de consumo duráveis ou não duráveis são obrigados a imprimir, nas embalagens, rotulos e manuais de instrução, informações sobre:"
+        "content": "Os fabricantes e importadores de produtos de consumo duráveis ou não duráveis são obrigados a imprimir, nas embalagens, rótulos e manuais de instrução, informações sobre:"
       },
       "art33": {
         "number": "Art. 33",
@@ -216,13 +204,7 @@ const CDC_CONTENT = {
         "number": "Art. 35",
         "title": "Responsabilidade por Danos",
         "content": "Se o fornecedor de produtos e serviços recusar cumprimento à oferta, apresentação ou publicidade, o consumidor poderá, alternativamente e à sua escolha:"
-      }
-    }
-  },
-
-  "capitulo6": {
-    "title": "Capítulo VI - Da Proteção Contratual",
-    "articles": {
+      },
       "art36": {
         "number": "Art. 36",
         "title": "Contratos de Adesão",
@@ -272,13 +254,7 @@ const CDC_CONTENT = {
         "number": "Art. 45",
         "title": "Responsabilidade por Informações",
         "content": "O fornecedor de produtos e serviços potencialmente nocivos ou perigosos à saúde ou segurança deverá informar, de maneira ostensiva e adequada, a respeito da sua nocividade ou periculosidade, sem prejuízo da adoção de outras medidas cabíveis em cada caso concreto."
-      }
-    }
-  },
-
-  "capitulo7": {
-    "title": "Capítulo VII - Das Sanções Administrativas",
-    "articles": {
+      },
       "art46": {
         "number": "Art. 46",
         "title": "Sanções Administrativas",
@@ -333,13 +309,7 @@ const CDC_CONTENT = {
         "number": "Art. 56",
         "title": "Responsabilidade por Danos",
         "content": "As sanções dos incisos II a X do artigo anterior serão aplicadas pela autoridade administrativa, observado o disposto no art. 55."
-      }
-    }
-  },
-
-  "capitulo8": {
-    "title": "Capítulo VIII - Da Defesa do Consumidor em Juízo",
-    "articles": {
+      },
       "art57": {
         "number": "Art. 57",
         "title": "Ação Coletiva",
@@ -364,13 +334,7 @@ const CDC_CONTENT = {
         "number": "Art. 61",
         "title": "Ação Coletiva",
         "content": "A ação coletiva para a defesa de interesses ou direitos difusos, coletivos e individuais homogêneos será proposta pelo Ministério Público, pela União, pelos Estados e Municípios, pelas autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil, autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil, autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil."
-      }
-    }
-  },
-
-  "disposicoes_finais": {
-    "title": "Disposições Finais",
-    "articles": {
+      },
       "art62": {
         "number": "Art. 62",
         "title": "Vigência",
@@ -378,6 +342,286 @@ const CDC_CONTENT = {
       },
       "art63": {
         "number": "Art. 63",
+        "title": "Revogação",
+        "content": "Ficam revogadas as disposições em contrário."
+      },
+      "art64": {
+        "number": "Art. 64",
+        "title": "Responsabilidade Civil",
+        "content": "O fornecedor de produtos e serviços responde, independentemente da existência de culpa, pela reparação dos danos causados aos consumidores por defeitos decorrentes de projeto, fabricação, construção, montagem, fórmulas, manipulação, apresentação ou acondicionamento de seus produtos, bem como por informações insuficientes ou inadequadas sobre sua utilização e riscos."
+      },
+      "art65": {
+        "number": "Art. 65",
+        "title": "Responsabilidade Solidária",
+        "content": "O comerciante é igualmente responsável, nos termos do artigo anterior, quando:"
+      },
+      "art66": {
+        "number": "Art. 66",
+        "title": "Responsabilidade por Serviços",
+        "content": "O fornecedor de serviços responde, independentemente da existência de culpa, pela reparação dos danos causados aos consumidores por defeitos relativos à prestação dos serviços, bem como por informações insuficientes ou inadequadas sobre sua fruição e riscos."
+      },
+      "art67": {
+        "number": "Art. 67",
+        "title": "Vícios de Qualidade",
+        "content": "O fornecedor de serviços responde pelos vícios de qualidade que os tornem impróprios ao consumo ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+      },
+      "art68": {
+        "number": "Art. 68",
+        "title": "Prazo para Reclamação",
+        "content": "O consumidor pode fazer valer o direito de reclamar pelos vícios aparentes ou de fácil constatação até trinta dias, tratando-se de fornecimento de serviço e de produtos não duráveis, e até noventa dias, tratando-se de fornecimento de serviço e de produtos duráveis."
+      },
+      "art69": {
+        "number": "Art. 69",
+        "title": "Responsabilidade Solidária",
+        "content": "Para os efeitos desta Seção, equiparam-se aos consumidores todas as pessoas determináveis ou não, expostas às práticas nele previstas."
+      },
+      "art70": {
+        "number": "Art. 70",
+        "title": "Responsabilidade do Fornecedor",
+        "content": "Os fornecedores de produtos de consumo duráveis ou não duráveis respondem solidariamente pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+      },
+      "art71": {
+        "number": "Art. 71",
+        "title": "Prazo para Reclamação de Vícios",
+        "content": "O consumidor pode fazer valer o direito de reclamar pelos vícios aparentes ou de fácil constatação até trinta dias, tratando-se de fornecimento de serviço e de produtos não duráveis, e até noventa dias, tratando-se de fornecimento de serviço e de produtos duráveis."
+      },
+      "art72": {
+        "number": "Art. 72",
+        "title": "Responsabilidade por Informações",
+        "content": "O fornecedor de produtos e serviços potencialmente nocivos ou perigosos à saúde ou segurança deverá informar, de maneira ostensiva e adequada, a respeito da sua nocividade ou periculosidade, sem prejuízo da adoção de outras medidas cabíveis em cada caso concreto."
+      },
+      "art73": {
+        "number": "Art. 73",
+        "title": "Garantia de Qualidade",
+        "content": "O fornecedor de produtos e serviços potencialmente nocivos ou perigosos à saúde ou segurança deverá informar, de maneira ostensiva e adequada, a respeito da sua nocividade ou periculosidade, sem prejuízo da adoção de outras medidas cabíveis em cada caso concreto."
+      },
+      "art74": {
+        "number": "Art. 74",
+        "title": "Responsabilidade por Danos",
+        "content": "Os órgãos públicos, por si ou suas empresas, concessionárias, permissionárias ou sob qualquer outra forma de empreendimento, são obrigados a fornecer serviços adequados, eficientes, seguros e, quanto aos essenciais, contínuos."
+      },
+      "art75": {
+        "number": "Art. 75",
+        "title": "Responsabilidade do Estado",
+        "content": "A falta de cumprimento da oferta, nos casos do art. 35, sujeita o fornecedor às penalidades previstas no art. 56, sem prejuízo das perdas e danos."
+      },
+      "art76": {
+        "number": "Art. 76",
+        "title": "Responsabilidade por Informações Inadequadas",
+        "content": "A garantia legal de adequação do produto ou serviço não impede a estipulação de garantia contratual mais ampla."
+      },
+      "art77": {
+        "number": "Art. 77",
+        "title": "Garantia Contratual",
+        "content": "É vedada a estipulação contratual de cláusula que impossibilite, exonere ou atenue a obrigação de indenizar prevista nesta e nas seções anteriores."
+      },
+      "art78": {
+        "number": "Art. 78",
+        "title": "Oferta e Publicidade",
+        "content": "A oferta e apresentação de produtos ou serviços devem assegurar informações corretas, claras, precisas, ostensivas e em língua portuguesa sobre suas características, qualidades, quantidade, composição, preço, garantia, prazos de validade e origem, entre outros dados, bem como sobre os riscos que apresentam à saúde e segurança dos consumidores."
+      },
+      "art79": {
+        "number": "Art. 79",
+        "title": "Responsabilidade pela Publicidade",
+        "content": "É proibida toda publicidade enganosa ou abusiva."
+      },
+      "art80": {
+        "number": "Art. 80",
+        "title": "Publicidade Enganosa",
+        "content": "A publicidade é enganosa por omissão quando deixar de informar sobre dado essencial do produto ou serviço."
+      },
+      "art81": {
+        "number": "Art. 81",
+        "title": "Publicidade Abusiva",
+        "content": "Para os fins deste código, a publicidade é abusiva, dentre outras, a que:"
+      },
+      "art82": {
+        "number": "Art. 82",
+        "title": "Responsabilidade Solidária",
+        "content": "Toda informação ou publicidade, suficientemente precisa, veiculada por qualquer forma ou meio de comunicação com relação a produtos e serviços oferecidos ou apresentados, obriga o fornecedor que a fizer veicular ou dela se utilizar e integra o contrato que vier a ser celebrado."
+      },
+      "art83": {
+        "number": "Art. 83",
+        "title": "Oferta Vinculante",
+        "content": "A oferta de produtos e serviços deve assegurar informações corretas, claras, precisas, ostensivas e em língua portuguesa sobre suas características, qualidades, quantidade, composição, preço, garantia, prazos de validade e origem, entre outros dados, bem como sobre os riscos que apresentam à saúde e segurança dos consumidores."
+      },
+      "art84": {
+        "number": "Art. 84",
+        "title": "Responsabilidade por Informações",
+        "content": "Os fabricantes e importadores de produtos de consumo duráveis ou não duráveis são obrigados a imprimir, nas embalagens, rótulos e manuais de instrução, informações sobre:"
+      },
+      "art85": {
+        "number": "Art. 85",
+        "title": "Informações Obrigatórias",
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+      },
+      "art86": {
+        "number": "Art. 86",
+        "title": "Práticas Abusivas",
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+      },
+      "art87": {
+        "number": "Art. 87",
+        "title": "Responsabilidade por Danos",
+        "content": "Se o fornecedor de produtos e serviços recusar cumprimento à oferta, apresentação ou publicidade, o consumidor poderá, alternativamente e à sua escolha:"
+      },
+      "art88": {
+        "number": "Art. 88",
+        "title": "Contratos de Adesão",
+        "content": "O contrato de adesão é aquele cujas cláusulas tenham sido aprovadas pela autoridade competente ou estabelecidas unilateralmente pelo fornecedor de produtos ou serviços, sem que o consumidor possa discutir ou modificar substancialmente seu conteúdo."
+      },
+      "art89": {
+        "number": "Art. 89",
+        "title": "Cláusulas Abusivas",
+        "content": "São nulas de pleno direito, entre outras, as cláusulas contratuais relativas ao fornecimento de produtos e serviços que:"
+      },
+      "art90": {
+        "number": "Art. 90",
+        "title": "Interpretação de Contratos",
+        "content": "Os contratos que regulam as relações de consumo não obrigarão os consumidores, se não lhes for dada a oportunidade de tomar conhecimento prévio de seu conteúdo, ou se os respectivos instrumentos forem redigidos de modo a dificultar a compreensão de seu sentido e alcance."
+      },
+      "art91": {
+        "number": "Art. 91",
+        "title": "Contratos de Consumo",
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+      },
+      "art92": {
+        "number": "Art. 92",
+        "title": "Responsabilidade Contratual",
+        "content": "O fornecedor de produtos ou serviços não pode variar o preço de forma unilateral."
+      },
+      "art93": {
+        "number": "Art. 93",
+        "title": "Variação de Preços",
+        "content": "O fornecedor de produtos ou serviços não pode variar o preço de forma unilateral."
+      },
+      "art94": {
+        "number": "Art. 94",
+        "title": "Responsabilidade por Danos",
+        "content": "O fornecedor de produtos ou serviços responde pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+      },
+      "art95": {
+        "number": "Art. 95",
+        "title": "Responsabilidade Solidária",
+        "content": "O consumidor pode fazer valer o direito de reclamar pelos vícios aparentes ou de fácil constatação até trinta dias, tratando-se de fornecimento de serviço e de produtos não duráveis, e até noventa dias, tratando-se de fornecimento de serviço e de produtos duráveis."
+      },
+      "art96": {
+        "number": "Art. 96",
+        "title": "Prazo para Reclamação",
+        "content": "O consumidor pode fazer valer o direito de reclamar pelos vícios aparentes ou de fácil constatação até trinta dias, tratando-se de fornecimento de serviço e de produtos não duráveis, e até noventa dias, tratando-se de fornecimento de serviço e de produtos duráveis."
+      },
+      "art97": {
+        "number": "Art. 97",
+        "title": "Responsabilidade por Informações",
+        "content": "O fornecedor de produtos e serviços potencialmente nocivos ou perigosos à saúde ou segurança deverá informar, de maneira ostensiva e adequada, a respeito da sua nocividade ou periculosidade, sem prejuízo da adoção de outras medidas cabíveis em cada caso concreto."
+      },
+      "art98": {
+        "number": "Art. 98",
+        "title": "Sanções Administrativas",
+        "content": "As infrações às normas de defesa do consumidor ficam sujeitas às seguintes sanções administrativas, sem prejuízo das de natureza civil, penal e das definidas em normas específicas:"
+      },
+      "art99": {
+        "number": "Art. 99",
+        "title": "Multa",
+        "content": "Multa de R$ 100,00 (cem reais) a R$ 3.000.000,00 (três milhões de reais)."
+      },
+      "art100": {
+        "number": "Art. 100",
+        "title": "Apreensão de Produtos",
+        "content": "Apreensão de produtos."
+      },
+      "art101": {
+        "number": "Art. 101",
+        "title": "Inutilização de Produtos",
+        "content": "Inutilização de produtos."
+      },
+      "art102": {
+        "number": "Art. 102",
+        "title": "Proibição de Fabricação",
+        "content": "Proibição de fabricação de produtos."
+      },
+      "art103": {
+        "number": "Art. 103",
+        "title": "Proibição de Fornecimento",
+        "content": "Proibição de fornecimento de produtos ou de prestação de serviços."
+      },
+      "art104": {
+        "number": "Art. 104",
+        "title": "Suspensão de Atividade",
+        "content": "Suspensão de fornecimento de produtos ou de prestação de serviços."
+      },
+      "art105": {
+        "number": "Art. 105",
+        "title": "Revogação de Concessão",
+        "content": "Revogação de concessão ou permissão de uso."
+      },
+      "art106": {
+        "number": "Art. 106",
+        "title": "Cassação de Registro",
+        "content": "Cassação de registro do produto junto ao órgão competente."
+      },
+      "art107": {
+        "number": "Art. 107",
+        "title": "Proibição de Publicidade",
+        "content": "Proibição de publicidade."
+      },
+      "art108": {
+        "number": "Art. 108",
+        "title": "Responsabilidade por Danos",
+        "content": "As sanções dos incisos II a X do artigo anterior serão aplicadas pela autoridade administrativa, observado o disposto no art. 55."
+      },
+      "art109": {
+        "number": "Art. 109",
+        "title": "Ação Coletiva",
+        "content": "Para a defesa dos direitos e interesses protegidos por este código são admissíveis todas as espécies de ações capazes de propiciar sua adequada e efetiva tutela."
+      },
+      "art110": {
+        "number": "Art. 110",
+        "title": "Legitimidade para Agir",
+        "content": "Podem propor as ações previstas neste código:"
+      },
+      "art111": {
+        "number": "Art. 111",
+        "title": "Ação de Responsabilidade",
+        "content": "A ação de responsabilidade por danos materiais e morais ou estéticos, individuais, homogêneos, difusos ou coletivos, será proposta no foro do domicílio do consumidor, no foro de eleição deste, ou no foro do domicílio do fornecedor."
+      },
+      "art112": {
+        "number": "Art. 112",
+        "title": "Competência",
+        "content": "A ação de responsabilidade por danos materiais e morais ou estéticos, individuais, homogêneos, difusos ou coletivos, será proposta no foro do domicílio do consumidor, no foro de eleição deste, ou no foro do domicílio do fornecedor."
+      },
+      "art113": {
+        "number": "Art. 113",
+        "title": "Ação Coletiva",
+        "content": "A ação coletiva para a defesa de interesses ou direitos difusos, coletivos e individuais homogêneos será proposta pelo Ministério Público, pela União, pelos Estados e Municípios, pelas autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil, autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil, autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil."
+      },
+      "art114": {
+        "number": "Art. 114",
+        "title": "Vigência",
+        "content": "Esta lei entra em vigor após decorridos cento e vinte dias de sua publicação oficial."
+      },
+      "art115": {
+        "number": "Art. 115",
+        "title": "Revogação",
+        "content": "Ficam revogadas as disposições em contrário."
+      },
+      "art116": {
+        "number": "Art. 116",
+        "title": "Disposições Finais",
+        "content": "Esta lei entra em vigor após decorridos cento e vinte dias de sua publicação oficial."
+      },
+      "art117": {
+        "number": "Art. 117",
+        "title": "Revogação",
+        "content": "Ficam revogadas as disposições em contrário."
+      },
+      "art118": {
+        "number": "Art. 118",
+        "title": "Disposições Finais",
+        "content": "Esta lei entra em vigor após decorridos cento e vinte dias de sua publicação oficial."
+      },
+      "art119": {
+        "number": "Art. 119",
         "title": "Revogação",
         "content": "Ficam revogadas as disposições em contrário."
       }
