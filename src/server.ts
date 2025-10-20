@@ -65,16 +65,24 @@ app.use((req, res) => {
 // Initialize database and start server
 async function startServer() {
   try {
+    // Try to initialize database, but don't fail if it's not available
     await initializeDatabase();
     
-    // Start session cleanup service
-    SessionService.startCleanupInterval();
+    // Start session cleanup service only if database is available
+    if (process.env.DATABASE_URL) {
+      SessionService.startCleanupInterval();
+    }
     
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`📱 Admin panel: http://localhost:${PORT}/admin`);
       console.log(`🌐 Site: http://localhost:${PORT}/site`);
       console.log(`🔍 Health check: http://localhost:${PORT}/health`);
+      
+      if (!process.env.DATABASE_URL) {
+        console.log('⚠️  PostgreSQL not configured - add DATABASE_URL environment variable');
+        console.log('📋 Add PostgreSQL addon in Railway dashboard');
+      }
     });
   } catch (error) {
     console.error('Failed to start server:', error);

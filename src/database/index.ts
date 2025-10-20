@@ -12,6 +12,10 @@ export default pool;
 
 export const initializeDatabase = async () => {
   try {
+    // Test connection first
+    await pool.query('SELECT 1');
+    console.log('Database connection successful');
+
     // Create tables if they don't exist
     await pool.query(`
       CREATE TABLE IF NOT EXISTS qrcodes (
@@ -50,6 +54,7 @@ export const initializeDatabase = async () => {
     console.log('Database initialized successfully');
   } catch (error) {
     console.error('Error initializing database:', error);
-    throw error;
+    console.log('Continuing without database - PostgreSQL addon may not be configured yet');
+    // Don't throw error - let the app start without database for now
   }
 };

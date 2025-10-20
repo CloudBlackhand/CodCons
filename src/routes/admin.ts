@@ -7,6 +7,13 @@ const router = Router();
 // GET /api/admin/qrcodes - Listar todos os QR codes
 router.get('/qrcodes', async (req: Request, res: Response) => {
   try {
+    if (!process.env.DATABASE_URL) {
+      return res.status(503).json({
+        success: false,
+        error: 'Database not configured. Please add PostgreSQL addon in Railway dashboard.'
+      });
+    }
+    
     const qrCodes = await QRService.getAllQRCodes();
     res.json({ success: true, data: qrCodes });
   } catch (error) {
