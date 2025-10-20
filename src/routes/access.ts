@@ -1,53 +1,77 @@
-import express from 'express';
-import { qrCodeService } from '../services/qrService';
+import { Router, Request, Response } from 'express';
+import { QRService } from '../services/qrService';
+import { SessionService } from '../services/sessionService';
 
-const router = express.Router();
+const router = Router();
 
-// Rota para validação de acesso via QR Code
-router.get('/:code', async (req, res) => {
+// GET /api/access/scan/:code - Validar QR code e criar sessão
+router.get('/scan/:code', async (req: Request, res: Response) => {
   try {
     const { code } = req.params;
-    const ip = req.ip || req.connection.remoteAddress || 'unknown';
-    const userAgent = req.get('User-Agent') || 'unknown';
 
-    const validation = await qrCodeService.validateAccess(code);
-    
-    // Log da tentativa de acesso
-    await qrCodeService.logAccess(
-      validation.qrCode?.id || 'unknown',
-      ip,
-      userAgent,
-      validation.valid
-    );
+    // Validar se o QR code existe e está ativo
+    const qrCode = await QRService.validateQRCode(code);
 
-    if (!validation.valid) {
-      return res.status(403).json({
+    if (!qrCode) {
+      return res.status(400).json({
         success: false,
-        message: 'Acesso negado. QR Code inválido ou desativado.',
-        code: 'ACCESS_DENIED'
+        error: 'QR code inválido ou bloqueado'
       });
     }
 
-    res.json({
-      success: true,
-      message: 'Acesso autorizado',
-      qrCode: {
-        name: validation.qrCode?.name,
-        description: validation.qrCode?.description
-      }
-    });
+    // Criar sessão de 5 minutos
+    const session = await SessionService.createSession(qrCode.id);
 
+    // Redirecionar para o site com token de sessão
+    const siteUrl = process.env.SITE_URL || 'http://localhost:3000/site';
+    const redirectUrl = `${siteUrl}?session=${session.token}`;
+
+    res.redirect(redirectUrl);
   } catch (error) {
-    console.error('Erro na validação de acesso:', error);
+    console.error('Error processing QR code scan:', error);
     res.status(500).json({
       success: false,
-      message: 'Erro interno do servidor',
-      code: 'INTERNAL_ERROR'
+      error: 'Erro interno do servidor'
+    });
+  }
+});
+
+// GET /api/access/verify/:token - Verificar se sessão é válida
+router.get('/verify/:token', async (req: Request, res: Response) => {
+  try {
+    const { token } = req.params;
+
+    const session = await SessionService.validateSession(token);
+
+    if (!session) {
+      return res.status(401).json({
+        success: false,
+        error: 'Sessão inválida ou expirada',
+        expired: true
+      });
+    }
+
+    // Calcular tempo restante
+    const now = new Date();
+    const expiresAt = new Date(session.expires_at);
+    const timeLeft = Math.max(0, expiresAt.getTime() - now.getTime());
+    const minutesLeft = Math.ceil(timeLeft / (1000 * 60));
+
+    res.json({
+      success: true,
+      data: {
+        valid: true,
+        expiresAt: session.expires_at,
+        minutesLeft: minutesLeft
+      }
+    });
+  } catch (error) {
+    console.error('Error verifying session:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro interno do servidor'
     });
   }
 });
 
 export default router;
-
-
-

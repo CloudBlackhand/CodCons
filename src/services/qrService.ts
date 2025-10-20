@@ -1,98 +1,125 @@
 import QRCode from 'qrcode';
 import { v4 as uuidv4 } from 'uuid';
-import { database } from '../database';
-import { QRCode as QRCodeType } from '../types';
+import pool from '../database';
+import { QRCode as QRCodeType, QRCodeWithImage } from '../types';
 
-export class QRCodeService {
-  async generateQRCode(name: string, description?: string): Promise<QRCodeType> {
-    const code = uuidv4();
-    
-    const qrCodeData = await database.createQRCode({
-      name,
-      description,
-      code,
-      isActive: true
-    });
-
-    return qrCodeData;
+export class QRService {
+  static generateUniqueCode(): string {
+    return uuidv4().replace(/-/g, '').substring(0, 16);
   }
 
-  async generateQRCodeImage(qrCodeId: string): Promise<string> {
-    const qrCode = await database.getQRCode(qrCodeId);
-    if (!qrCode) {
-      throw new Error('QR Code não encontrado');
-    }
-
-    // Gera URL para o site CDC com token
-    const url = `${process.env.BASE_URL || 'http://localhost:3000'}/cdc?token=${qrCode.code}`;
-    
+  static async generateQRCodeImage(url: string): Promise<string> {
     try {
       const qrImage = await QRCode.toDataURL(url, {
-        width: 300,
+        width: 200,
         margin: 2,
         color: {
           dark: '#000000',
           light: '#FFFFFF'
         }
       });
-      
       return qrImage;
     } catch (error) {
-      throw new Error('Erro ao gerar imagem do QR Code');
+      console.error('Error generating QR code image:', error);
+      throw new Error('Failed to generate QR code image');
     }
   }
 
-  // Método auxiliar para obter URL de acesso do CDC
-  getAccessUrl(code: string): string {
-    return `${process.env.BASE_URL || 'http://localhost:3000'}/cdc?token=${code}`;
-  }
+  static async createQRCode(name: string): Promise<QRCodeWithImage> {
+    const code = this.generateUniqueCode();
+    const accessUrl = `${process.env.ADMIN_URL || 'http://localhost:3000'}/api/access/scan/${code}`;
+    
+    try {
+      const result = await pool.query(
+        'INSERT INTO qrcodes (code, name, status) VALUES ($1, $2, $3) RETURNING *',
+        [code, name, 'active']
+      );
 
-  async validateAccess(code: string): Promise<{ valid: boolean; qrCode?: QRCodeType }> {
-    const qrCode = await database.getQRCodeByCode(code);
+      const qrCode = result.rows[0] as QRCodeType;
+      const qrImage = await this.generateQRCodeImage(accessUrl);
 
-    if (!qrCode) {
-      return { valid: false };
+      return {
+        ...qrCode,
+        qrImage,
+        accessUrl
+      };
+    } catch (error) {
+      console.error('Error creating QR code:', error);
+      throw new Error('Failed to create QR code');
     }
+  }
 
-    if (!qrCode.isActive) {
-      return { valid: false, qrCode };
+  static async getAllQRCodes(): Promise<QRCodeWithImage[]> {
+    try {
+      const result = await pool.query(
+        'SELECT * FROM qrcodes ORDER BY created_at DESC'
+      );
+
+      const qrCodes = await Promise.all(
+        result.rows.map(async (qrCode: QRCodeType) => {
+          const accessUrl = `${process.env.ADMIN_URL || 'http://localhost:3000'}/api/access/scan/${qrCode.code}`;
+          const qrImage = await this.generateQRCodeImage(accessUrl);
+          
+          return {
+            ...qrCode,
+            qrImage,
+            accessUrl
+          };
+        })
+      );
+
+      return qrCodes;
+    } catch (error) {
+      console.error('Error fetching QR codes:', error);
+      throw new Error('Failed to fetch QR codes');
     }
-
-    return { valid: true, qrCode };
   }
 
-  async getAllQRCodes(): Promise<QRCodeType[]> {
-    return database.getAllQRCodes();
+  static async updateQRCodeStatus(id: string, status: 'active' | 'blocked'): Promise<QRCodeType> {
+    try {
+      const result = await pool.query(
+        'UPDATE qrcodes SET status = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2 RETURNING *',
+        [status, id]
+      );
+
+      if (result.rows.length === 0) {
+        throw new Error('QR code not found');
+      }
+
+      return result.rows[0] as QRCodeType;
+    } catch (error) {
+      console.error('Error updating QR code status:', error);
+      throw new Error('Failed to update QR code status');
+    }
   }
 
-  async updateQRCode(id: string, updates: Partial<QRCodeType>): Promise<QRCodeType | null> {
-    return database.updateQRCode(id, updates);
+  static async deleteQRCode(id: string): Promise<void> {
+    try {
+      const result = await pool.query(
+        'DELETE FROM qrcodes WHERE id = $1',
+        [id]
+      );
+
+      if (result.rowCount === 0) {
+        throw new Error('QR code not found');
+      }
+    } catch (error) {
+      console.error('Error deleting QR code:', error);
+      throw new Error('Failed to delete QR code');
+    }
   }
 
-  async deleteQRCode(id: string): Promise<boolean> {
-    return database.deleteQRCode(id);
-  }
+  static async validateQRCode(code: string): Promise<QRCodeType | null> {
+    try {
+      const result = await pool.query(
+        'SELECT * FROM qrcodes WHERE code = $1 AND status = $2',
+        [code, 'active']
+      );
 
-  async toggleQRCodeStatus(id: string): Promise<QRCodeType | null> {
-    return database.toggleQRCodeStatus(id);
-  }
-
-  async logAccess(qrCodeId: string, ip: string, userAgent: string, success: boolean): Promise<void> {
-    await database.logAccess({
-      qrCodeId,
-      ip,
-      userAgent,
-      success
-    });
-  }
-
-  async getStats() {
-    return database.getStats();
+      return result.rows.length > 0 ? result.rows[0] as QRCodeType : null;
+    } catch (error) {
+      console.error('Error validating QR code:', error);
+      throw new Error('Failed to validate QR code');
+    }
   }
 }
-
-export const qrCodeService = new QRCodeService();
-
-
-
-

@@ -1,190 +1,95 @@
-import express from 'express';
-import { qrCodeService } from '../services/qrService';
-import { requireAuth } from '../middleware/auth';
+import { Router, Request, Response } from 'express';
+import { QRService } from '../services/qrService';
+import { CreateQRCodeRequest, UpdateQRCodeStatusRequest } from '../types';
 
-const router = express.Router();
+const router = Router();
 
-// Middleware de autenticação para todas as rotas admin
-router.use(requireAuth);
-
-// Listar todos os QR Codes
-router.get('/qr-codes', async (req, res) => {
+// GET /api/admin/qrcodes - Listar todos os QR codes
+router.get('/qrcodes', async (req: Request, res: Response) => {
   try {
-    const qrCodes = await qrCodeService.getAllQRCodes();
-    res.json({
-      success: true,
-      data: qrCodes
-    });
+    const qrCodes = await QRService.getAllQRCodes();
+    res.json({ success: true, data: qrCodes });
   } catch (error) {
-    console.error('Erro ao listar QR Codes:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro interno do servidor'
+    console.error('Error fetching QR codes:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to fetch QR codes' 
     });
   }
 });
 
-// Criar novo QR Code
-router.post('/qr-codes', async (req, res) => {
+// POST /api/admin/qrcodes - Criar novo QR code
+router.post('/qrcodes', async (req: Request, res: Response) => {
   try {
-    const { name, description } = req.body;
+    const { name }: CreateQRCodeRequest = req.body;
 
-    if (!name) {
+    if (!name || name.trim().length === 0) {
       return res.status(400).json({
         success: false,
-        message: 'Nome é obrigatório'
+        error: 'Name is required'
       });
     }
 
-    const qrCode = await qrCodeService.generateQRCode(name, description);
-    
-    res.status(201).json({
-      success: true,
-      data: qrCode,
-      message: 'QR Code criado com sucesso'
-    });
+    const qrCode = await QRService.createQRCode(name.trim());
+    res.status(201).json({ success: true, data: qrCode });
   } catch (error) {
-    console.error('Erro ao criar QR Code:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro interno do servidor'
+    console.error('Error creating QR code:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to create QR code' 
     });
   }
 });
 
-// Gerar imagem do QR Code
-router.get('/qr-codes/:id/image', async (req, res) => {
+// PUT /api/admin/qrcodes/:id/status - Atualizar status do QR code
+router.put('/qrcodes/:id/status', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const qrImage = await qrCodeService.generateQRCodeImage(id);
-    
-    res.json({
-      success: true,
-      data: {
-        image: qrImage,
-        qrCodeId: id
-      }
-    });
+    const { status }: UpdateQRCodeStatusRequest = req.body;
+
+    if (!status || !['active', 'blocked'].includes(status)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Status must be either "active" or "blocked"'
+      });
+    }
+
+    const qrCode = await QRService.updateQRCodeStatus(id, status);
+    res.json({ success: true, data: qrCode });
   } catch (error) {
-    console.error('Erro ao gerar imagem do QR Code:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro interno do servidor'
-    });
-  }
-});
-
-// Atualizar QR Code
-router.put('/qr-codes/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, description, isActive } = req.body;
-
-    const updates: any = {};
-    if (name !== undefined) updates.name = name;
-    if (description !== undefined) updates.description = description;
-    if (isActive !== undefined) updates.isActive = isActive;
-
-    const updatedQRCode = await qrCodeService.updateQRCode(id, updates);
-
-    if (!updatedQRCode) {
+    console.error('Error updating QR code status:', error);
+    if (error instanceof Error && error.message === 'QR code not found') {
       return res.status(404).json({
         success: false,
-        message: 'QR Code não encontrado'
+        error: 'QR code not found'
       });
     }
-
-    res.json({
-      success: true,
-      data: updatedQRCode,
-      message: 'QR Code atualizado com sucesso'
-    });
-  } catch (error) {
-    console.error('Erro ao atualizar QR Code:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro interno do servidor'
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to update QR code status' 
     });
   }
 });
 
-// Alternar status do QR Code (ativar/desativar)
-router.patch('/qr-codes/:id/toggle', async (req, res) => {
+// DELETE /api/admin/qrcodes/:id - Deletar QR code
+router.delete('/qrcodes/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const updatedQRCode = await qrCodeService.toggleQRCodeStatus(id);
-
-    if (!updatedQRCode) {
+    await QRService.deleteQRCode(id);
+    res.json({ success: true, message: 'QR code deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting QR code:', error);
+    if (error instanceof Error && error.message === 'QR code not found') {
       return res.status(404).json({
         success: false,
-        message: 'QR Code não encontrado'
+        error: 'QR code not found'
       });
     }
-
-    res.json({
-      success: true,
-      data: updatedQRCode,
-      message: `QR Code ${updatedQRCode.isActive ? 'ativado' : 'desativado'} com sucesso`
-    });
-  } catch (error) {
-    console.error('Erro ao alternar status do QR Code:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro interno do servidor'
-    });
-  }
-});
-
-// Deletar QR Code
-router.delete('/qr-codes/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deleted = await qrCodeService.deleteQRCode(id);
-
-    if (!deleted) {
-      return res.status(404).json({
-        success: false,
-        message: 'QR Code não encontrado'
-      });
-    }
-
-    res.json({
-      success: true,
-      message: 'QR Code deletado com sucesso'
-    });
-  } catch (error) {
-    console.error('Erro ao deletar QR Code:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro interno do servidor'
-    });
-  }
-});
-
-// Estatísticas
-router.get('/stats', async (req, res) => {
-  try {
-    const stats = await qrCodeService.getStats();
-    res.json({
-      success: true,
-      data: stats
-    });
-  } catch (error) {
-    console.error('Erro ao buscar estatísticas:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro interno do servidor'
+    res.status(500).json({ 
+      success: false, 
+      error: 'Failed to delete QR code' 
     });
   }
 });
 
 export default router;
-
-
-
-
-
-
-
-
-

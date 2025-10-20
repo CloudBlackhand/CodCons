@@ -1,215 +1,181 @@
-# Sistema de Controle de Acesso QR Code - Código de Defesa do Consumidor
+# 🎯 Sistema de Gerenciamento de QR Codes
 
-Sistema completo de controle de acesso via QR Codes para proteger o site do Código de Defesa do Consumidor (Lei nº 8.078/1990). Desenvolvido para ser hospedado no Railway.
+Sistema completo para criação, gerenciamento e controle de acesso via QR codes com sessões temporárias de 5 minutos.
 
-## 🚀 Funcionalidades
+## 🚀 Características
 
-- ✅ Site completo do CDC com todos os artigos da Lei 8.078/1990
-- ✅ Geração de QR Codes únicos para acesso ao CDC
-- ✅ Controle de acesso (ativar/revogar QR Codes)
-- ✅ Validação a cada requisição (necessário escanear após F5 ou bloqueio)
-- ✅ Interface administrativa completa
-- ✅ Navegação por Títulos e Capítulos do CDC
-- ✅ Busca por número de artigo ou palavra-chave
-- ✅ Logs detalhados de acesso e estatísticas
-- ✅ Design jurídico moderno com fontes serifadas
-- ✅ Pronto para deploy no Railway
+- **Painel Administrativo**: Interface React para gerenciar QR codes
+- **Controle de Acesso**: QR codes geram sessões temporárias de 5 minutos
+- **Site Protegido**: Área restrita com validação de sessão em tempo real
+- **Deploy Railway**: Configurado para deploy automático no Railway
+- **PostgreSQL**: Banco de dados robusto para armazenar dados
+- **TypeScript**: Código tipado e seguro
+
+## 🏗️ Arquitetura
+
+### Backend (Node.js + Express + TypeScript)
+- API REST para CRUD de QR codes
+- Sistema de validação e geração de sessões
+- Integração com PostgreSQL
+- Limpeza automática de sessões expiradas
+
+### Frontend (React + Vite + TypeScript)
+- Painel administrativo responsivo
+- Geração e download de QR codes
+- Interface intuitiva para gerenciamento
+
+### Site de Acesso
+- Página protegida com validação de sessão
+- Timer em tempo real para sessão ativa
+- Interface moderna e responsiva
+
+## 📋 Fluxo de Funcionamento
+
+1. **Admin cria QR code** → Sistema gera código único + imagem QR
+2. **Usuário escaneia QR** → Redirecionamento para site com sessão de 5min
+3. **Site valida sessão** → Acesso liberado enquanto sessão ativa
+4. **Sessão expira** → Acesso negado automaticamente
 
 ## 🛠️ Tecnologias
 
-- **Backend**: Node.js + TypeScript + Express
-- **QR Codes**: Biblioteca `qrcode`
-- **Banco de Dados**: Inicialmente em memória (depois PostgreSQL)
+- **Backend**: Node.js, Express, TypeScript, PostgreSQL
+- **Frontend**: React, Vite, TypeScript, Axios
+- **QR Codes**: qrcode library
 - **Deploy**: Railway
-- **Segurança**: Helmet, CORS, Rate Limiting
+- **Banco**: PostgreSQL (Railway addon)
 
-## 📦 Instalação
+## 🚀 Deploy no Railway
 
-1. Clone o repositório
-2. Instale as dependências:
+### 1. Preparação
 ```bash
-npm install
+# Clone o repositório
+git clone <seu-repo>
+cd qr-code-access-system
+
+# Instale dependências
+npm run install:all
 ```
 
-3. Configure as variáveis de ambiente:
+### 2. Configuração Railway
+
+1. **Crie novo projeto no Railway**
+2. **Adicione PostgreSQL addon**
+3. **Configure variáveis de ambiente**:
+
+```env
+DATABASE_URL=<automático do Railway PostgreSQL>
+NODE_ENV=production
+SESSION_SECRET=<sua-chave-secreta>
+SITE_URL=https://seu-app.railway.app/site
+ADMIN_URL=https://seu-app.railway.app
+```
+
+### 3. Deploy
 ```bash
+# Push para o repositório conectado ao Railway
+git push origin main
+```
+
+## 🏃‍♂️ Desenvolvimento Local
+
+### Pré-requisitos
+- Node.js 18+
+- PostgreSQL
+- npm ou yarn
+
+### Setup
+```bash
+# Instalar dependências
+npm run install:all
+
+# Configurar variáveis de ambiente
 cp env.example .env
-```
+# Edite o .env com suas configurações
 
-4. Execute em desenvolvimento:
-```bash
+# Iniciar PostgreSQL local
+# Crie um banco de dados
+
+# Executar em desenvolvimento
 npm run dev
 ```
 
-5. Para produção:
+### URLs Locais
+- **Admin Panel**: http://localhost:3000/admin
+- **Site Protegido**: http://localhost:3000/site
+- **API**: http://localhost:3000/api
+- **Health Check**: http://localhost:3000/health
+
+## 📁 Estrutura do Projeto
+
+```
+├── src/                    # Backend TypeScript
+│   ├── database/          # Configuração PostgreSQL
+│   ├── routes/            # Rotas da API
+│   ├── services/          # Lógica de negócio
+│   ├── types/             # Definições TypeScript
+│   └── server.ts          # Servidor principal
+├── client/                # Frontend React
+│   ├── src/
+│   │   ├── components/    # Componentes React
+│   │   ├── api/          # Cliente API
+│   │   └── App.tsx       # App principal
+│   └── vite.config.ts    # Config Vite
+├── public/site/          # Site protegido
+├── railway.json          # Config Railway
+├── Procfile             # Comando de start
+└── package.json         # Dependências
+```
+
+## 🔧 Scripts Disponíveis
+
 ```bash
-npm run build
-npm start
-```
-
-## 🔧 Configuração
-
-### Variáveis de Ambiente
-
-```env
-PORT=3000
-NODE_ENV=production
-ADMIN_PASSWORD=sua_senha_segura_aqui
-JWT_SECRET=sua_chave_secreta_jwt
-DATABASE_URL=postgresql://user:password@host:port/database
-```
-
-### Deploy no Railway
-
-1. Conecte seu repositório ao Railway
-2. Configure as variáveis de ambiente
-3. Adicione um banco PostgreSQL (opcional)
-4. Deploy automático!
-
-## 📱 Como Usar
-
-### 1. Acessar o Painel Admin
-- URL: `https://seu-dominio.railway.app/admin`
-- Senha padrão: `admin123` (altere em produção!)
-
-### 2. Criar QR Codes para Acesso ao CDC
-- No painel admin, clique em "Novo QR Code"
-- Digite nome (ex: "QR Atendente 1") e descrição opcional
-- Clique em "Criar QR Code"
-- O sistema gerará automaticamente:
-  - Um token único (UUID)
-  - QR Code que aponta para `/cdc?token=UUID`
-  - URL completa visível no painel
-
-### 3. Gerenciar Acesso
-- **Testar Acesso**: Clique no botão "🔗 Testar Acesso" para abrir o site CDC
-- **Ativar/Desativar**: Use o botão para revogar ou restaurar acesso
-- **Gerar Imagem**: Crie QR Code para impressão
-- **Deletar**: Remova QR Codes desnecessários
-
-### 4. Usar o QR Code
-- Escaneie o QR Code com celular/tablet
-- Será redirecionado para o site do CDC
-- Navegue pelos artigos, busque por palavras-chave
-- **Importante**: Ao dar F5 ou bloquear a tela, é necessário escanear o QR Code novamente
-
-### 5. Site do CDC
-- **Navegação**: Use a sidebar para navegar por Títulos e Capítulos
-- **Busca**: Digite número do artigo (ex: "art 18", "42") ou palavra-chave
-- **Resultados**: Artigos encontrados são destacados com highlight
-- **Design**: Tipografia serifada, design clean e moderno
-
-## 🔐 API Endpoints
-
-### CDC (Site Principal)
-- `GET /cdc?token=UUID` - Site do Código de Defesa do Consumidor (requer token válido)
-
-### Acesso
-- `GET /api/access/:code` - Validar QR Code (API JSON)
-
-### Admin (Requer autenticação)
-- `GET /api/admin/qr-codes` - Listar todos os QR Codes
-- `POST /api/admin/qr-codes` - Criar novo QR Code
-- `PUT /api/admin/qr-codes/:id` - Atualizar QR Code
-- `PATCH /api/admin/qr-codes/:id/toggle` - Ativar/Desativar
-- `DELETE /api/admin/qr-codes/:id` - Deletar QR Code
-- `GET /api/admin/qr-codes/:id/image` - Gerar imagem do QR Code
-- `GET /api/admin/stats` - Estatísticas do sistema
-
-### Web
-- `GET /` - Página inicial
-- `GET /admin` - Painel administrativo
-- `GET /api/health` - Health check
-
-## 📊 Estrutura do Projeto
-
-```
-src/
-├── data/             # Dados estruturados do CDC
-│   └── cdc-data.ts   # Todos os artigos do CDC em JSON
-├── database/         # Gerenciamento de dados
-│   └── index.ts      # Banco em memória
-├── middleware/       # Middlewares
-│   ├── auth.ts       # Autenticação admin
-│   └── tokenAuth.ts  # Validação de tokens CDC
-├── routes/           # Rotas da API e web
-│   ├── access.ts     # API de validação
-│   ├── admin.ts      # Painel administrativo API
-│   ├── cdc.ts        # Site do CDC
-│   └── web.ts        # Páginas web
-├── services/         # Lógica de negócio
-│   └── qrService.ts  # Geração e validação de QR Codes
-├── types/            # Tipos TypeScript
-│   └── index.ts      # Interfaces e tipos
-└── server.ts         # Servidor principal
+npm run dev          # Desenvolvimento (backend + frontend)
+npm run build        # Build completo
+npm run build:client # Build apenas frontend
+npm run build:server # Build apenas backend
+npm start           # Iniciar em produção
 ```
 
 ## 🔒 Segurança
 
-- **Validação de Token**: Cada acesso ao CDC requer token válido
-- **Sessão Volátil**: Token deve ser revalidado após F5 ou bloqueio de tela
-- **Revogação Instantânea**: Admin pode desativar QR Codes a qualquer momento
-- **Autenticação Admin**: Senha obrigatória para área administrativa
-- **Rate Limiting**: 100 requisições por 15 minutos por IP
-- **Headers Seguros**: Helmet configurado para proteção
-- **Logs Detalhados**: Registro de todos os acessos (IP, User-Agent, timestamp)
-- **Validação Server-Side**: Toda validação acontece no backend
+- Sessões temporárias de 5 minutos
+- Validação de tokens únicos
+- Limpeza automática de sessões expiradas
+- Códigos QR únicos e não previsíveis
+- Controle de status (ativo/bloqueado)
 
-## 📈 Funcionalidades Implementadas
+## 📱 Uso
 
-- ✅ Site completo do CDC com Lei 8.078/1990
-- ✅ Sistema de tokens para acesso controlado
-- ✅ Validação a cada requisição (anti-persistência)
-- ✅ Interface moderna com tipografia serifada
-- ✅ Busca por artigo e palavra-chave
-- ✅ Navegação por Títulos e Capítulos
-- ✅ Painel admin com gestão de QR Codes
-- ✅ Logs de acesso detalhados
+### Painel Admin
+1. Acesse `/admin`
+2. Crie novos QR codes
+3. Gerencie status (liberar/bloquear)
+4. Baixe imagens dos QR codes
+5. Delete QR codes desnecessários
 
-## 📈 Melhorias Futuras
-
-1. **Banco PostgreSQL**: Migrar de memória para PostgreSQL para persistência
-2. **Mais Artigos CDC**: Adicionar artigos 21-119 completos
-3. **JWT**: Implementar autenticação JWT para admin
-4. **Notificações**: Alertas de acesso em tempo real via WebSocket
-5. **Relatórios**: Dashboard com gráficos de uso
-6. **Multi-idioma**: Suporte para outros idiomas
-7. **PWA**: Transformar em Progressive Web App
+### Acesso via QR Code
+1. Usuário escaneia QR code
+2. Redirecionamento automático para site
+3. Sessão de 5 minutos iniciada
+4. Timer em tempo real
+5. Acesso negado após expiração
 
 ## 🐛 Troubleshooting
 
-### Acesso Negado ao CDC
-1. **Token Inválido**: Verifique se o QR Code está ativo no painel admin
-2. **QR Code Revogado**: Confirme se não foi desativado recentemente
-3. **URL Incorreta**: Certifique-se de que a URL contém `?token=UUID`
-4. **Verifique Logs**: Acesse `/api/admin/stats` para ver tentativas de acesso
+### Problemas comuns:
+- **Erro de conexão DB**: Verifique DATABASE_URL
+- **QR codes não funcionam**: Verifique SITE_URL
+- **Build falha**: Execute `npm run install:all`
 
-### Site CDC não carrega
-1. **Escaneie Novamente**: Após F5, é necessário escanear o QR Code novamente
-2. **Token Expirado**: Gere um novo QR Code no painel admin
-3. **Verifique Conectividade**: Confirme conexão com a internet
+### Logs Railway:
+```bash
+railway logs
+```
 
-### Erro de autenticação no Admin
-1. Confirme a senha de admin (padrão: `admin123`)
-2. Verifique as variáveis de ambiente (`ADMIN_PASSWORD`)
-3. Teste em modo desenvolvimento
+## 📄 Licença
 
-### Problemas no Railway
-1. Verifique as variáveis de ambiente no dashboard
-2. Confirme se o build foi concluído com sucesso
-3. Verifique os logs do Railway
-4. Teste a rota `/api/health` para verificar se o servidor está respondendo
-
-## 📞 Suporte
-
-Para dúvidas ou problemas:
-1. Verifique os logs do sistema
-2. Teste localmente primeiro
-3. Confirme as configurações do Railway
+MIT License - Use livremente para seus projetos!
 
 ---
 
-**Desenvolvido para Railway** 🚂
-
-
-
+**Desenvolvido para Railway** 🚄 | **Simples, Rápido, Eficiente** ⚡
