@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código de Defesa do Consumidor - Acesso via QR Code</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+</head>
+<body>
+    <div class="loading">
+        <div>🔄 Verificando acesso...</div>
+    </div>
+
+    <div class="site-container" style="display: none;">
+        <!-- Menu Mobile -->
+        <button class="mobile-menu-btn">☰</button>
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>⚖️ CDC</h1>
+                <div class="subtitle">Código de Defesa do Consumidor</div>
+            </div>
+            
+            <div class="session-timer">
+                <div class="timer-display">--:--</div>
+                <div class="timer-label">Sessão Expira em</div>
+            </div>
+            
+            <div class="search-section">
+                <input type="text" class="search-input" placeholder="🔍 Buscar no CDC...">
+            </div>
+            
+            <nav class="nav-section">
+                <div class="nav-title">📚 Navegação</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="preambulo">
+                            📖 Preâmbulo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo1">
+                            📋 Cap. I - Dos Direitos do Consumidor
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo2">
+                            📋 Cap. II - Da Política Nacional
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo3">
+                            📋 Cap. III - Dos Direitos Básicos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo4">
+                            📋 Cap. IV - Da Qualidade
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo5">
+                            📋 Cap. V - Das Práticas Comerciais
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo6">
+                            📋 Cap. VI - Da Proteção Contratual
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo7">
+                            📋 Cap. VII - Das Sanções
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="capitulo8">
+                            📋 Cap. VIII - Da Defesa em Juízo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link chapter" data-chapter="disposicoes_finais">
+                            📋 Disposições Finais
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Overlay Mobile -->
+        <div class="sidebar-overlay"></div>
+        
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Conteúdo será carregado dinamicamente -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cdc-content.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
