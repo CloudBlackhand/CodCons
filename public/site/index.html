@@ -6,83 +6,202 @@
     <title>Código de Defesa do Consumidor - Lei 8.078/90</title>
     <link rel="stylesheet" href="/site/styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
-    <meta name="description" content="Código de Defesa do Consumidor - Lei 8.078/90 - Texto integral e oficial">
-    <meta name="keywords" content="CDC, Código de Defesa do Consumidor, Lei 8078, Direito do Consumidor, Legislação">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="loading">
-        <div>🔄 Verificando acesso...</div>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-icon">⚖️</div>
+            <div class="loading-text">Carregando Código de Defesa do Consumidor...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="site-container" style="display: none;">
-        <!-- Header Jurídico -->
-        <header class="header">
+    <div class="site-container" id="siteContainer" style="display: none;">
+        <!-- Header -->
+        <header class="site-header">
             <div class="header-content">
-                <div class="header-title">
-                    <div>Código de Defesa do Consumidor</div>
-                    <div class="header-subtitle">Lei nº 8.078, de 11 de setembro de 1990</div>
+                <div class="header-logo">
+                    <span class="logo-icon">⚖️</span>
+                    <div class="logo-text">
+                        <h1>Código de Defesa do Consumidor</h1>
+                        <p>Lei nº 8.078, de 11 de setembro de 1990</p>
+                    </div>
                 </div>
-                <div class="session-info">
-                    <div>
-                        <div class="timer-display">--:--</div>
-                        <div class="timer-label">Sessão Expira em</div>
+                <div class="header-actions">
+                    <div class="session-info">
+                        <div class="session-timer">
+                            <span class="timer-icon">⏱️</span>
+                            <span class="timer-text" id="timerDisplay">--:--</span>
+                        </div>
+                        <div class="session-label">Sessão ativa</div>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Container Principal -->
-        <div class="container">
-            <!-- Sidebar de Navegação -->
-            <aside class="sidebar">
-                <div class="sidebar-title">📚 Navegação</div>
-                
-                <div class="search-section">
-                    <input type="text" class="search-input" placeholder="🔍 Buscar artigo ou palavra-chave...">
-                </div>
-                
-                <nav class="nav-section">
-                    <div class="nav-title">Estrutura da Lei</div>
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link chapter" data-chapter="preambulo">
-                                📖 Preâmbulo
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link chapter" data-chapter="titulo1">
-                                📋 Título I - Das Disposições Gerais
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link chapter" data-chapter="titulo2">
-                                📋 Título II - Da Política Nacional
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link chapter" data-chapter="titulo3">
-                                📋 Título III - Dos Direitos Básicos
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <div class="nav-section">
-                    <div class="nav-title">Informações</div>
-                    <div style="font-size: 12px; color: #6c757d; line-height: 1.4;">
-                        <p><strong>Lei:</strong> 8.078/90</p>
-                        <p><strong>Artigos:</strong> 119</p>
-                        <p><strong>Status:</strong> Vigente</p>
-                        <p><strong>Fonte:</strong> Câmara dos Deputados</p>
+        <!-- Navigation -->
+        <nav class="site-nav">
+            <div class="nav-content">
+                <div class="nav-search">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar artigo, palavra-chave ou número...">
+                        <button class="search-btn">🔍</button>
                     </div>
                 </div>
-            </aside>
-            
-            <!-- Conteúdo Principal -->
-            <main class="main-content">
-                <!-- Conteúdo será carregado dinamicamente -->
-            </main>
-        </div>
+                <div class="nav-menu">
+                    <button class="nav-toggle" id="navToggle">☰ Menu</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Homepage -->
+            <div class="homepage" id="homepage">
+                <div class="homepage-hero">
+                    <div class="hero-content">
+                        <h2>Bem-vindo ao Código de Defesa do Consumidor</h2>
+                        <p>Consulte a legislação completa que protege os direitos dos consumidores brasileiros</p>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="stat-number">119</span>
+                                <span class="stat-label">Artigos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">8</span>
+                                <span class="stat-label">Títulos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">1990</span>
+                                <span class="stat-label">Ano</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="homepage-sections">
+                    <section class="quick-access">
+                        <h3>📚 Acesso Rápido</h3>
+                        <div class="quick-links">
+                            <a href="#" class="quick-link" data-chapter="titulo1">
+                                <span class="link-icon">📋</span>
+                                <div class="link-content">
+                                    <h4>Título I</h4>
+                                    <p>Das Disposições Gerais</p>
+                                </div>
+                            </a>
+                            <a href="#" class="quick-link" data-chapter="titulo2">
+                                <span class="link-icon">📋</span>
+                                <div class="link-content">
+                                    <h4>Título II</h4>
+                                    <p>Da Política Nacional</p>
+                                </div>
+                            </a>
+                            <a href="#" class="quick-link" data-chapter="titulo3">
+                                <span class="link-icon">📋</span>
+                                <div class="link-content">
+                                    <h4>Título III</h4>
+                                    <p>Dos Direitos Básicos</p>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="popular-articles">
+                        <h3>⭐ Artigos Mais Consultados</h3>
+                        <div class="article-grid">
+                            <a href="#" class="article-card" data-chapter="titulo1" data-article="art2">
+                                <span class="article-number">Art. 2º</span>
+                                <h4>Definição de Consumidor</h4>
+                                <p>Consumidor é toda pessoa física ou jurídica que adquire ou utiliza produto ou serviço como destinatário final.</p>
+                            </a>
+                            <a href="#" class="article-card" data-chapter="titulo1" data-article="art3">
+                                <span class="article-number">Art. 3º</span>
+                                <h4>Definições</h4>
+                                <p>Fornecedor é toda pessoa física ou jurídica, pública ou privada, nacional ou estrangeira...</p>
+                            </a>
+                            <a href="#" class="article-card" data-chapter="titulo1" data-article="art6">
+                                <span class="article-number">Art. 6º</span>
+                                <h4>Direitos Básicos</h4>
+                                <p>São direitos básicos do consumidor...</p>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="search-section">
+                        <h3>🔍 Busca Avançada</h3>
+                        <div class="search-options">
+                            <div class="search-option">
+                                <label>Buscar por número de artigo:</label>
+                                <input type="text" id="articleSearch" placeholder="Ex: 25, 46, 78">
+                            </div>
+                            <div class="search-option">
+                                <label>Buscar por palavra-chave:</label>
+                                <input type="text" id="keywordSearch" placeholder="Ex: garantia, responsabilidade, publicidade">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area" id="contentArea" style="display: none;">
+                <div class="content-header">
+                    <button class="back-btn" id="backBtn">← Voltar</button>
+                    <div class="content-title">
+                        <h1 id="contentTitle">Título</h1>
+                        <p id="contentSubtitle">Subtítulo</p>
+                    </div>
+                </div>
+                <div class="content-body" id="contentBody">
+                    <!-- Conteúdo será carregado dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="search-results" id="searchResults" style="display: none;">
+                <div class="search-header">
+                    <h2>Resultados da Busca</h2>
+                    <p id="searchCount">0 resultados encontrados</p>
+                </div>
+                <div class="search-list" id="searchList">
+                    <!-- Resultados serão carregados dinamicamente -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>📚 Navegação</h3>
+                <button class="sidebar-close" id="sidebarClose">✕</button>
+            </div>
+            <div class="sidebar-content">
+                <div class="nav-section">
+                    <h4>📖 Estrutura do Código</h4>
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-link" data-chapter="preambulo">Preâmbulo</a></li>
+                        <li><a href="#" class="nav-link" data-chapter="titulo1">Título I - Das Disposições Gerais</a></li>
+                        <li><a href="#" class="nav-link" data-chapter="titulo2">Título II - Da Política Nacional</a></li>
+                        <li><a href="#" class="nav-link" data-chapter="titulo3">Título III - Dos Direitos Básicos</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h4>⭐ Artigos Populares</h4>
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-link" data-chapter="titulo1" data-article="art2">Art. 2º - Definição de Consumidor</a></li>
+                        <li><a href="#" class="nav-link" data-chapter="titulo1" data-article="art3">Art. 3º - Definições</a></li>
+                        <li><a href="#" class="nav-link" data-chapter="titulo1" data-article="art6">Art. 6º - Direitos Básicos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Overlay -->
+        <div class="overlay" id="overlay"></div>
     </div>
 
     <!-- Scripts -->

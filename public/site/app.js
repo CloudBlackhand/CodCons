@@ -1,6 +1,4 @@
-// Aplicação Jurídica - Código de Defesa do Consumidor
-// Interface profissional para consulta jurídica
-
+// Aplicação principal do site CDC - Interface Jurídica Profissional
 class CDCApp {
   constructor() {
     this.sessionToken = null;
@@ -8,7 +6,7 @@ class CDCApp {
     this.timerInterval = null;
     this.currentChapter = null;
     this.currentArticle = null;
-    this.searchTimeout = null;
+    this.isHomepage = true;
     
     this.init();
   }
@@ -16,7 +14,7 @@ class CDCApp {
   init() {
     this.checkSession();
     this.setupEventListeners();
-    this.loadDefaultContent();
+    this.showHomepage();
   }
 
   // Verificar sessão atual
@@ -75,12 +73,12 @@ class CDCApp {
     const minutes = Math.floor(timeLeft / 60000);
     const seconds = Math.floor((timeLeft % 60000) / 1000);
     
-    const timerDisplay = document.querySelector('.timer-display');
+    const timerDisplay = document.getElementById('timerDisplay');
     if (timerDisplay) {
       timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
       
       // Mudar cor baseado no tempo restante
-      timerDisplay.className = 'timer-display';
+      timerDisplay.className = 'timer-text';
       if (timeLeft <= 60000) { // 1 minuto
         timerDisplay.classList.add('timer-danger');
       } else if (timeLeft <= 300000) { // 5 minutos
@@ -110,70 +108,145 @@ class CDCApp {
 
   // Configurar event listeners
   setupEventListeners() {
-    // Busca com debounce
-    const searchInput = document.querySelector('.search-input');
+    // Busca principal
+    const searchInput = document.getElementById('searchInput');
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
-        clearTimeout(this.searchTimeout);
-        this.searchTimeout = setTimeout(() => {
-          this.handleSearch(e.target.value);
-        }, 300);
+        this.handleSearch(e.target.value);
+      });
+    }
+
+    // Busca por artigo
+    const articleSearch = document.getElementById('articleSearch');
+    if (articleSearch) {
+      articleSearch.addEventListener('input', (e) => {
+        this.handleArticleSearch(e.target.value);
+      });
+    }
+
+    // Busca por palavra-chave
+    const keywordSearch = document.getElementById('keywordSearch');
+    if (keywordSearch) {
+      keywordSearch.addEventListener('input', (e) => {
+        this.handleKeywordSearch(e.target.value);
       });
     }
 
     // Navegação
     document.addEventListener('click', (e) => {
-      if (e.target.matches('.nav-link')) {
+      if (e.target.matches('.nav-link, .quick-link, .article-card')) {
         e.preventDefault();
         this.handleNavigation(e.target);
       }
     });
-  }
 
-  // Carregar conteúdo padrão
-  loadDefaultContent() {
-    this.showChapter('preambulo');
+    // Botão voltar
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        this.showHomepage();
+      });
+    }
+
+    // Menu mobile
+    const navToggle = document.getElementById('navToggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        this.toggleSidebar();
+      });
+    }
+
+    // Fechar sidebar
+    const sidebarClose = document.getElementById('sidebarClose');
+    if (sidebarClose) {
+      sidebarClose.addEventListener('click', () => {
+        this.closeSidebar();
+      });
+    }
+
+    // Overlay
+    const overlay = document.getElementById('overlay');
+    if (overlay) {
+      overlay.addEventListener('click', () => {
+        this.closeSidebar();
+      });
+    }
   }
 
   // Mostrar conteúdo principal
   showContent() {
-    document.querySelector('.site-container').style.display = 'block';
-    document.querySelector('.loading')?.remove();
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('siteContainer').style.display = 'flex';
+  }
+
+  // Mostrar homepage
+  showHomepage() {
+    this.isHomepage = true;
+    document.getElementById('homepage').style.display = 'block';
+    document.getElementById('contentArea').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'none';
+    
+    // Limpar busca
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) searchInput.value = '';
+    
+    const articleSearch = document.getElementById('articleSearch');
+    if (articleSearch) articleSearch.value = '';
+    
+    const keywordSearch = document.getElementById('keywordSearch');
+    if (keywordSearch) keywordSearch.value = '';
   }
 
   // Mostrar erro
   showError(message) {
-    const container = document.querySelector('.site-container');
+    const container = document.getElementById('siteContainer');
     container.innerHTML = `
-      <header class="header">
-        <div class="header-content">
-          <div class="header-title">
-            <div>Código de Defesa do Consumidor</div>
-            <div class="header-subtitle">Lei nº 8.078, de 11 de setembro de 1990</div>
-          </div>
-        </div>
-      </header>
-      <div class="container">
-        <main class="main-content">
-          <div class="message error">
-            <h2>🚫 Acesso Negado</h2>
-            <p>${message}</p>
-            <p><strong>Instruções:</strong></p>
+      <div class="error-container">
+        <div class="error-content">
+          <div class="error-icon">🚫</div>
+          <h2>Acesso Negado</h2>
+          <p>${message}</p>
+          <div class="error-instructions">
+            <h3>Instruções:</h3>
             <ul>
               <li>Escaneie o QR code novamente</li>
               <li>Certifique-se de que o QR code está ativo</li>
               <li>Entre em contato com o administrador se o problema persistir</li>
             </ul>
           </div>
-        </main>
+        </div>
       </div>
     `;
   }
 
-  // Lidar com busca
+  // Lidar com busca principal
   handleSearch(query) {
     if (!query.trim()) {
-      this.clearSearchResults();
+      this.showHomepage();
+      return;
+    }
+
+    const results = searchCDCContent(query);
+    this.displaySearchResults(results, query);
+  }
+
+  // Lidar com busca por artigo
+  handleArticleSearch(query) {
+    if (!query.trim()) {
+      this.showHomepage();
+      return;
+    }
+
+    // Buscar por número de artigo
+    const articleNumber = query.replace(/\D/g, ''); // Remove não-números
+    const results = searchCDCContent(`Art. ${articleNumber}`);
+    this.displaySearchResults(results, `Artigo ${articleNumber}`);
+  }
+
+  // Lidar com busca por palavra-chave
+  handleKeywordSearch(query) {
+    if (!query.trim()) {
+      this.showHomepage();
       return;
     }
 
@@ -183,62 +256,59 @@ class CDCApp {
 
   // Exibir resultados da busca
   displaySearchResults(results, query) {
-    const mainContent = document.querySelector('.main-content');
+    this.isHomepage = false;
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('contentArea').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'block';
+    
+    const searchCount = document.getElementById('searchCount');
+    const searchList = document.getElementById('searchList');
     
     if (results.length === 0) {
-      mainContent.innerHTML = `
-        <div class="content-header">
-          <h1 class="content-title">🔍 Resultados da Busca</h1>
-          <div class="content-subtitle">Nenhum resultado encontrado para "${query}"</div>
-        </div>
-        <div class="message">
+      searchCount.textContent = `Nenhum resultado encontrado para "${query}"`;
+      searchList.innerHTML = `
+        <div class="no-results">
+          <div class="no-results-icon">🔍</div>
+          <h3>Nenhum resultado encontrado</h3>
           <p>Tente usar termos diferentes ou verifique a ortografia.</p>
-          <p>Você pode buscar por:</p>
-          <ul>
-            <li>Número do artigo (ex: "artigo 1", "art. 5")</li>
-            <li>Palavras-chave (ex: "consumidor", "fornecedor", "responsabilidade")</li>
-            <li>Títulos de capítulos</li>
-          </ul>
         </div>
       `;
       return;
     }
 
-    let html = `
-      <div class="content-header">
-        <h1 class="content-title">🔍 Resultados da Busca</h1>
-        <div class="content-subtitle">${results.length} resultado(s) encontrado(s) para "${query}"</div>
-      </div>
-      <div class="search-results">
-    `;
-
+    searchCount.textContent = `${results.length} resultado(s) encontrado(s) para "${query}"`;
+    
+    let html = '';
     results.forEach(result => {
       html += `
         <div class="search-result-item" onclick="app.navigateToResult('${result.chapterKey || ''}', '${result.key || ''}')">
-          <div class="search-result-title">${result.title}</div>
-          ${result.number ? `<div class="search-result-number">${result.number}</div>` : ''}
-          <div class="search-result-preview">${this.highlightSearchTerm(result.content.substring(0, 200), query)}...</div>
+          <div class="result-header">
+            <span class="result-type">${this.getResultTypeLabel(result.type)}</span>
+            ${result.number ? `<span class="result-number">${result.number}</span>` : ''}
+          </div>
+          <h4 class="result-title">${result.title}</h4>
+          <p class="result-content">${this.truncateText(result.content, 200)}</p>
         </div>
       `;
     });
 
-    html += `
-      </div>
-    `;
-
-    mainContent.innerHTML = html;
+    searchList.innerHTML = html;
   }
 
-  // Destacar termo de busca
-  highlightSearchTerm(text, term) {
-    if (!term) return text;
-    const regex = new RegExp(`(${term})`, 'gi');
-    return text.replace(regex, '<strong>$1</strong>');
+  // Obter label do tipo de resultado
+  getResultTypeLabel(type) {
+    const labels = {
+      'chapter': '📋 Capítulo',
+      'article': '📄 Artigo',
+      'content': '📝 Conteúdo'
+    };
+    return labels[type] || '📄 Resultado';
   }
 
-  // Limpar resultados da busca
-  clearSearchResults() {
-    this.loadDefaultContent();
+  // Truncar texto
+  truncateText(text, maxLength) {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
   }
 
   // Navegar para resultado da busca
@@ -255,17 +325,13 @@ class CDCApp {
     const chapterKey = element.dataset.chapter;
     const articleKey = element.dataset.article;
 
-    // Atualizar navegação ativa
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    element.classList.add('active');
-
     if (articleKey) {
       this.showArticle(chapterKey, articleKey);
     } else if (chapterKey) {
       this.showChapter(chapterKey);
     }
+
+    this.closeSidebar();
   }
 
   // Mostrar capítulo
@@ -273,51 +339,55 @@ class CDCApp {
     const chapter = getChapter(chapterKey);
     if (!chapter) return;
 
-    const mainContent = document.querySelector('.main-content');
+    this.isHomepage = false;
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('contentArea').style.display = 'block';
     
-    let html = `
-      <div class="content-header">
-        <h1 class="content-title">${chapter.title}</h1>
-        <div class="content-subtitle">Código de Defesa do Consumidor - Lei 8.078/90</div>
-        <div class="content-meta">
-          <span>📅 Lei de 11 de setembro de 1990</span>
-          <span>📚 Texto Oficial</span>
-        </div>
-      </div>
-    `;
-
+    const contentTitle = document.getElementById('contentTitle');
+    const contentSubtitle = document.getElementById('contentSubtitle');
+    const contentBody = document.getElementById('contentBody');
+    
+    contentTitle.textContent = chapter.title;
+    contentSubtitle.textContent = 'Código de Defesa do Consumidor - Lei 8.078/90';
+    
+    let html = '';
+    
     if (chapter.content) {
       html += `
-        <div class="article-content">
-          <div class="article-text">
-            ${chapter.content}
-          </div>
+        <div class="chapter-intro">
+          ${chapter.content}
         </div>
       `;
     }
 
     if (chapter.articles) {
       html += `
-        <div class="articles-list">
+        <div class="articles-section">
+          <h3>Artigos do Capítulo</h3>
+          <div class="articles-grid">
       `;
 
       Object.keys(chapter.articles).forEach(articleKey => {
         const article = chapter.articles[articleKey];
         html += `
-          <div class="article-card" onclick="app.showArticle('${chapterKey}', '${articleKey}')">
-            <div class="article-card-title">${article.title}</div>
-            <div class="article-card-number">${article.number}</div>
-            <div class="article-card-content">${article.content.substring(0, 150)}...</div>
+          <div class="article-item" onclick="app.showArticle('${chapterKey}', '${articleKey}')">
+            <div class="article-header">
+              <span class="article-number">${article.number}</span>
+              <h4 class="article-title">${article.title}</h4>
+            </div>
+            <p class="article-preview">${this.truncateText(article.content, 150)}</p>
           </div>
         `;
       });
 
       html += `
+          </div>
         </div>
       `;
     }
 
-    mainContent.innerHTML = html;
+    contentBody.innerHTML = html;
     this.currentChapter = chapterKey;
     this.currentArticle = null;
   }
@@ -327,21 +397,23 @@ class CDCApp {
     const article = getArticle(chapterKey, articleKey);
     if (!article) return;
 
-    const mainContent = document.querySelector('.main-content');
+    this.isHomepage = false;
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('contentArea').style.display = 'block';
+    
+    const contentTitle = document.getElementById('contentTitle');
+    const contentSubtitle = document.getElementById('contentSubtitle');
+    const contentBody = document.getElementById('contentBody');
+    
+    contentTitle.textContent = article.title;
+    contentSubtitle.textContent = `${article.number} - ${getChapter(chapterKey).title}`;
     
     const html = `
-      <div class="content-header">
-        <h1 class="content-title">${article.title}</h1>
-        <div class="content-subtitle">${getChapter(chapterKey).title}</div>
-        <div class="content-meta">
-          <span>📅 Lei 8.078/90</span>
-          <span>📚 Código de Defesa do Consumidor</span>
-        </div>
-      </div>
       <div class="article-content">
         <div class="article-header">
-          <div class="article-number">${article.number}</div>
-          <div class="article-title">${article.title}</div>
+          <span class="article-number">${article.number}</span>
+          <h2 class="article-title">${article.title}</h2>
         </div>
         <div class="article-text">
           ${article.content}
@@ -349,22 +421,27 @@ class CDCApp {
       </div>
     `;
 
-    mainContent.innerHTML = html;
+    contentBody.innerHTML = html;
     this.currentChapter = chapterKey;
     this.currentArticle = articleKey;
+  }
 
-    // Atualizar navegação ativa
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
+  // Toggle sidebar
+  toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
     
-    const activeLink = document.querySelector(`[data-chapter="${chapterKey}"][data-article="${articleKey}"]`);
-    if (activeLink) {
-      activeLink.classList.add('active');
-    }
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
 
-    // Scroll para o topo
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Fechar sidebar
+  closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
   }
 }
 
