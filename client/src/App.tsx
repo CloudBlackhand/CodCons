@@ -55,46 +55,75 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="header">
-        <h1>🎯 Sistema de QR Codes</h1>
-        <p>Gerencie seus QR codes de acesso - criar, liberar, bloquear e apagar</p>
+    <div className="dashboard">
+      {/* Sidebar */}
+      <div className="sidebar">
+        <div className="sidebar-header">
+          <h1>🎯 QR Manager</h1>
+        </div>
+        <nav>
+          <ul className="sidebar-nav">
+            <li>
+              <a href="#" className="active">
+                📱 QR Codes
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                📊 Estatísticas
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                ⚙️ Configurações
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
 
-      {message && (
-        <div className="success">
-          {message}
+      {/* Main Content */}
+      <div className="main-content">
+        <div className="header">
+          <h1>Gerenciar QR Codes</h1>
+          <p>Controle de acesso com sessões temporárias de 5 minutos</p>
         </div>
-      )}
 
-      {error && (
-        <div className="error">
-          {error}
-        </div>
-      )}
+        {message && (
+          <div className="success">
+            ✅ {message}
+          </div>
+        )}
 
-      <QRCodeForm onQRCodeCreated={handleQRCodeCreated} />
+        {error && (
+          <div className="error">
+            ❌ {error}
+          </div>
+        )}
 
-      {loading ? (
-        <div className="loading">
-          Carregando QR codes...
-        </div>
-      ) : qrCodes.length === 0 ? (
-        <div className="loading">
-          Nenhum QR code encontrado. Crie o primeiro acima!
-        </div>
-      ) : (
-        <div className="qr-grid">
-          {qrCodes.map((qrCode) => (
-            <QRCodeCard
-              key={qrCode.id}
-              qrCode={qrCode}
-              onUpdateStatus={handleUpdateStatus}
-              onDelete={handleDelete}
-            />
-          ))}
-        </div>
-      )}
+        <QRCodeForm onQRCodeCreated={handleQRCodeCreated} />
+
+        {loading ? (
+          <div className="loading">
+            <div>🔄 Carregando QR codes...</div>
+          </div>
+        ) : qrCodes.length === 0 ? (
+          <div className="loading">
+            <div>📱 Nenhum QR code encontrado. Crie o primeiro acima!</div>
+          </div>
+        ) : (
+          <div className="qr-grid">
+            {qrCodes.map((qrCode) => (
+              <QRCodeCard
+                key={qrCode.id}
+                qrCode={qrCode}
+                onUpdateStatus={handleUpdateStatus}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

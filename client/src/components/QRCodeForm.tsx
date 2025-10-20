@@ -35,8 +35,8 @@ export const QRCodeForm: FC<QRCodeFormProps> = ({ onQRCodeCreated }) => {
   };
 
   return (
-    <div className="qr-card" style={{ marginBottom: '30px' }}>
-      <h3>Criar Novo QR Code</h3>
+    <div className="form-card">
+      <h3>➕ Criar Novo QR Code</h3>
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -62,7 +62,7 @@ export const QRCodeForm: FC<QRCodeFormProps> = ({ onQRCodeCreated }) => {
           className="btn btn-primary"
           disabled={loading || !name.trim()}
         >
-          {loading ? 'Criando...' : 'Criar QR Code'}
+          {loading ? '🔄 Criando...' : '✨ Criar QR Code'}
         </button>
       </form>
     </div>

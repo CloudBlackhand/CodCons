@@ -38,20 +38,21 @@ export const QRCodeCard: FC<QRCodeCardProps> = ({ qrCode, onUpdateStatus, onDele
 
   return (
     <div className="qr-card">
-      <h3>{qrCode.name}</h3>
+      <h3>📱 {qrCode.name}</h3>
       
       <div className="qr-image">
         <img src={qrCode.qrImage} alt={`QR Code para ${qrCode.name}`} style={{ maxWidth: '200px' }} />
       </div>
 
       <div className="qr-info">
-        <p><strong>Status:</strong> 
+        <p>
+          <strong>Status:</strong> 
           <span className={`status-badge status-${qrCode.status}`}>
-            {qrCode.status === 'active' ? 'Ativo' : 'Bloqueado'}
+            {qrCode.status === 'active' ? '✅ Ativo' : '🚫 Bloqueado'}
           </span>
         </p>
-        <p><strong>Código:</strong> {qrCode.code}</p>
-        <p><strong>Criado em:</strong> {new Date(qrCode.created_at).toLocaleString('pt-BR')}</p>
+        <p><strong>🔑 Código:</strong> {qrCode.code}</p>
+        <p><strong>📅 Criado:</strong> {new Date(qrCode.created_at).toLocaleString('pt-BR')}</p>
       </div>
 
       <div className="qr-actions">
@@ -59,28 +60,28 @@ export const QRCodeCard: FC<QRCodeCardProps> = ({ qrCode, onUpdateStatus, onDele
           className={`btn ${qrCode.status === 'active' ? 'btn-warning' : 'btn-success'}`}
           onClick={handleStatusToggle}
         >
-          {qrCode.status === 'active' ? 'Bloquear' : 'Liberar'}
+          {qrCode.status === 'active' ? '🚫 Bloquear' : '✅ Liberar'}
         </button>
         
         <button 
           className="btn btn-primary"
           onClick={() => copyToClipboard(qrCode.accessUrl)}
         >
-          Copiar URL
+          📋 Copiar URL
         </button>
         
         <button 
           className="btn btn-primary"
           onClick={downloadQRCode}
         >
-          Baixar QR
+          💾 Baixar QR
         </button>
         
         <button 
           className="btn btn-danger"
           onClick={handleDelete}
         >
-          Apagar
+          🗑️ Apagar
         </button>
       </div>
     </div>
