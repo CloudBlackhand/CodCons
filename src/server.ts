@@ -18,11 +18,10 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files - ORDER MATTERS!
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../client/dist')));
-
-// Serve site static files
-app.use('/site', express.static(path.join(__dirname, '../public/site')));
 
 // Routes
 app.use('/api/admin', adminRoutes);
