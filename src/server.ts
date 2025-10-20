@@ -21,6 +21,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+// Serve site static files
+app.use('/site', express.static(path.join(__dirname, '../public/site')));
+
 // Routes
 app.use('/api/admin', adminRoutes);
 app.use('/api/access', accessRoutes);
@@ -33,6 +36,11 @@ app.get('/admin*', (req, res) => {
 
 // Serve site page
 app.get('/site', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/site/index.html'));
+});
+
+// Serve site page with token parameter
+app.get('/site*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/site/index.html'));
 });
 
