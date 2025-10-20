@@ -199,9 +199,13 @@ class CDCLandingPage {
         </div>
       `;
     } else {
-      searchResultsGrid.innerHTML = this.filteredArticles.map(article => 
-        this.createArticleCard(article)
-      ).join('');
+      searchResultsGrid.innerHTML = `
+        <div class="articles-list">
+          ${this.filteredArticles.map(article => 
+            this.createArticleItem(article)
+          ).join('')}
+        </div>
+      `;
     }
 
     searchResults.style.display = 'block';
@@ -224,23 +228,21 @@ class CDCLandingPage {
 
   // Renderizar artigos
   renderArticles() {
-    const articlesGrid = document.getElementById('articles-grid');
-    articlesGrid.innerHTML = this.allArticles.map(article => 
-      this.createArticleCard(article)
+    const articlesList = document.getElementById('articles-list');
+    articlesList.innerHTML = this.allArticles.map(article => 
+      this.createArticleItem(article)
     ).join('');
   }
 
-  // Criar card de artigo
-  createArticleCard(article) {
-    const contentPreview = article.content.length > 200 
-      ? article.content.substring(0, 200) + '...'
-      : article.content;
-
+  // Criar item de artigo
+  createArticleItem(article) {
     return `
-      <div class="article-card" onclick="app.scrollToArticle('${article.chapterKey}', '${article.number}')">
-        <div class="article-number">${article.number}</div>
-        <div class="article-title">${article.title}</div>
-        <div class="article-content">${contentPreview}</div>
+      <div class="article-item" onclick="app.scrollToArticle('${article.chapterKey}', '${article.number}')">
+        <div class="article-header">
+          <div class="article-number">${article.number}</div>
+          <div class="article-title">${article.title}</div>
+        </div>
+        <div class="article-content">${article.content}</div>
       </div>
     `;
   }

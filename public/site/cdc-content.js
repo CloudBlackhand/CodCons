@@ -46,7 +46,7 @@ const CDC_CONTENT = {
       "art6": {
         "number": "Art. 6º",
         "title": "Direitos Básicos do Consumidor",
-        "content": "São direitos básicos do consumidor:"
+        "content": "São direitos básicos do consumidor: I - a proteção da vida, saúde e segurança contra os riscos provocados por práticas no fornecimento de produtos e serviços considerados perigosos ou nocivos; II - a educação e divulgação sobre o consumo adequado dos produtos e serviços, asseguradas a liberdade de escolha e a igualdade nas contratações; III - a informação adequada e clara sobre os diferentes produtos e serviços, com especificação correta de quantidade, características, composição, qualidade, tributos incidentes e preço, bem como sobre os riscos que apresentem; IV - a proteção contra a publicidade enganosa e abusiva, métodos comerciais coercitivos ou desleais, bem como contra práticas e cláusulas abusivas ou impostas no fornecimento de produtos e serviços; V - a modificação das cláusulas contratuais que estabeleçam prestações desproporcionais ou sua revisão em razão de fatos supervenientes que as tornem excessivamente onerosas; VI - a efetiva prevenção e reparação de danos patrimoniais e morais, individuais, coletivos e difusos; VII - o acesso aos órgãos judiciários e administrativos, com vistas à prevenção ou reparação de danos patrimoniais e morais, individuais, coletivos e difusos, assegurada a proteção jurídica, administrativa e técnica aos necessitados; VIII - a facilitação da defesa de seus direitos, inclusive com a inversão do ônus da prova, a seu favor, no processo civil, quando, a critério do juiz, for verossímil a alegação ou quando for ele hipossuficiente, segundo as regras ordinárias de experiências; IX - a adequada e eficaz prestação dos serviços públicos em geral."
       }
     }
   },
@@ -57,7 +57,7 @@ const CDC_CONTENT = {
       "art7": {
         "number": "Art. 7º",
         "title": "Princípios da Política Nacional",
-        "content": "A Política Nacional das Relações de Consumo tem por objetivo o atendimento das necessidades dos consumidores, o respeito à sua dignidade, saúde e segurança, a proteção de seus interesses econômicos, a melhoria da sua qualidade de vida, bem como a transparência e harmonia das relações de consumo, atendidos os seguintes princípios:"
+        "content": "A Política Nacional das Relações de Consumo tem por objetivo o atendimento das necessidades dos consumidores, o respeito à sua dignidade, saúde e segurança, a proteção de seus interesses econômicos, a melhoria da sua qualidade de vida, bem como a transparência e harmonia das relações de consumo, atendidos os seguintes princípios: I - reconhecimento da vulnerabilidade do consumidor no mercado de consumo; II - ação governamental no sentido de proteger efetivamente o consumidor: a) por iniciativa direta; b) por incentivos à criação e desenvolvimento de associações representativas; c) pela presença do Estado no mercado de consumo; d) pela garantia dos produtos e serviços com padrões adequados de qualidade, segurança, durabilidade e desempenho; III - harmonização dos interesses dos participantes das relações de consumo e compatibilização da proteção do consumidor com a necessidade de desenvolvimento econômico e tecnológico, de modo a viabilizar os princípios nos quais se funda a ordem econômica, sempre com base na boa-fé e equilíbrio nas relações entre consumidores e fornecedores; IV - educação e informação de fornecedores e consumidores, quanto aos seus direitos e deveres, com vistas à melhoria do mercado de consumo; V - incentivo à criação pelos fornecedores de meios eficientes de controle de qualidade e segurança de produtos e serviços, assim como de mecanismos alternativos de solução de conflitos de consumo; VI - coibição e repressão eficientes de todos os abusos praticados no mercado de consumo, inclusive a concorrência desleal e utilização indevida de inventos e criações industriais das marcas e nomes comerciais e signos distintivos, que possam causar prejuízos aos consumidores; VII - racionalização e melhoria dos serviços públicos; VIII - estudo constante das modificações do mercado de consumo."
       },
       "art8": {
         "number": "Art. 8º",
@@ -93,7 +93,7 @@ const CDC_CONTENT = {
       "art13": {
         "number": "Art. 13",
         "title": "Responsabilidade pelo Vício do Produto",
-        "content": "O comerciante é igualmente responsável, nos termos do artigo anterior, quando:"
+        "content": "O comerciante é igualmente responsável, nos termos do artigo anterior, quando: I - o fabricante, o construtor, o produtor ou o importador não puderem ser identificados; II - o produto for fornecido sem identificação clara do seu fabricante, produtor, construtor ou importador; III - não conservar adequadamente os produtos perecíveis."
       },
       "art14": {
         "number": "Art. 14",
@@ -103,7 +103,7 @@ const CDC_CONTENT = {
       "art15": {
         "number": "Art. 15",
         "title": "Responsabilidade pelo Vício do Serviço",
-        "content": "O fornecedor de serviços responde pelos vícios de qualidade que os tornem impróprios ao consumo ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+        "content": "O fornecedor de serviços responde pelos vícios de qualidade que os tornem impróprios ao consumo ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha: I - a reexecução dos serviços, sem custo adicional e quando cabível; II - a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de eventuais perdas e danos; III - o abatimento proporcional do preço."
       },
       "art16": {
         "number": "Art. 16",
@@ -118,7 +118,7 @@ const CDC_CONTENT = {
       "art18": {
         "number": "Art. 18",
         "title": "Responsabilidade do Fornecedor",
-        "content": "Os fornecedores de produtos de consumo duráveis ou não duráveis respondem solidariamente pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+        "content": "Os fornecedores de produtos de consumo duráveis ou não duráveis respondem solidariamente pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha: I - a substituição do produto por outro da mesma espécie, em perfeitas condições de uso; II - a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de eventuais perdas e danos; III - o abatimento proporcional do preço."
       },
       "art19": {
         "number": "Art. 19",
@@ -173,7 +173,7 @@ const CDC_CONTENT = {
       "art29": {
         "number": "Art. 29",
         "title": "Publicidade Abusiva",
-        "content": "Para os fins deste código, a publicidade é abusiva, dentre outras, a que:"
+        "content": "Para os fins deste código, a publicidade é abusiva, dentre outras, a que: I - seja discriminatória de qualquer natureza; II - incite à violência; III - explore o medo ou a superstição; IV - se aproveite da deficiência de julgamento e experiência da criança; V - desrespeite valores ambientais; VI - induza o consumidor a se comportar de forma prejudicial ou perigosa à sua saúde ou segurança."
       },
       "art30": {
         "number": "Art. 30",
@@ -188,22 +188,22 @@ const CDC_CONTENT = {
       "art32": {
         "number": "Art. 32",
         "title": "Responsabilidade por Informações",
-        "content": "Os fabricantes e importadores de produtos de consumo duráveis ou não duráveis são obrigados a imprimir, nas embalagens, rótulos e manuais de instrução, informações sobre:"
+        "content": "Os fabricantes e importadores de produtos de consumo duráveis ou não duráveis são obrigados a imprimir, nas embalagens, rótulos e manuais de instrução, informações sobre: I - especificação técnica; II - composição; III - prazo de validade; IV - origem; V - lote; VI - preço; VII - outros dados que por sua natureza, sejam indispensáveis para o uso adequado e seguro do produto."
       },
       "art33": {
         "number": "Art. 33",
         "title": "Informações Obrigatórias",
-        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas: I - condicionar o fornecimento de produto ou de serviço ao fornecimento de outro produto ou serviço, bem como, sem justa causa, a limites quantitativos; II - recusar atendimento às demandas dos consumidores, na exata medida de suas disponibilidades de estoque, e, ainda, de conformidade com os usos e costumes; III - enviar ou entregar ao consumidor, sem solicitação prévia, qualquer produto, ou fornecer qualquer serviço; IV - prevalecer-se da fraqueza ou ignorância do consumidor, tendo em vista sua idade, saúde, conhecimento ou condição social, para impingir-lhe seus produtos ou serviços; V - executar serviços sem a prévia elaboração de orçamento e autorização expressa do consumidor, ressalvadas as decorrentes de práticas anteriores entre as partes; VI - repassar informação depreciativa, referente a ato praticado pelo consumidor no exercício de seus direitos; VII - colocar, no mercado de consumo, qualquer produto ou serviço em desacordo com as normas expedidas pelos órgãos oficiais competentes ou, se normas específicas não existirem, pela Associação Brasileira de Normas Técnicas ou outra entidade credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial; VIII - deixar de estipular prazo para o cumprimento de sua obrigação ou deixar a fixação de seu termo inicial a seu exclusivo critério, quando tenha interesse legítimo do consumidor na tempestividade do cumprimento; IX - recusar a venda de bens ou a prestação de serviços, diretamente a quem se disponha a adquiri-los mediante pronto pagamento, ressalvados os casos de intermediação regulados em leis especiais; X - elevar sem justa causa o preço de produtos ou serviços."
       },
       "art34": {
         "number": "Art. 34",
         "title": "Práticas Abusivas",
-        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas: I - condicionar o fornecimento de produto ou de serviço ao fornecimento de outro produto ou serviço, bem como, sem justa causa, a limites quantitativos; II - recusar atendimento às demandas dos consumidores, na exata medida de suas disponibilidades de estoque, e, ainda, de conformidade com os usos e costumes; III - enviar ou entregar ao consumidor, sem solicitação prévia, qualquer produto, ou fornecer qualquer serviço; IV - prevalecer-se da fraqueza ou ignorância do consumidor, tendo em vista sua idade, saúde, conhecimento ou condição social, para impingir-lhe seus produtos ou serviços; V - executar serviços sem a prévia elaboração de orçamento e autorização expressa do consumidor, ressalvadas as decorrentes de práticas anteriores entre as partes; VI - repassar informação depreciativa, referente a ato praticado pelo consumidor no exercício de seus direitos; VII - colocar, no mercado de consumo, qualquer produto ou serviço em desacordo com as normas expedidas pelos órgãos oficiais competentes ou, se normas específicas não existirem, pela Associação Brasileira de Normas Técnicas ou outra entidade credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial; VIII - deixar de estipular prazo para o cumprimento de sua obrigação ou deixar a fixação de seu termo inicial a seu exclusivo critério, quando tenha interesse legítimo do consumidor na tempestividade do cumprimento; IX - recusar a venda de bens ou a prestação de serviços, diretamente a quem se disponha a adquiri-los mediante pronto pagamento, ressalvados os casos de intermediação regulados em leis especiais; X - elevar sem justa causa o preço de produtos ou serviços."
       },
       "art35": {
         "number": "Art. 35",
         "title": "Responsabilidade por Danos",
-        "content": "Se o fornecedor de produtos e serviços recusar cumprimento à oferta, apresentação ou publicidade, o consumidor poderá, alternativamente e à sua escolha:"
+        "content": "Se o fornecedor de produtos e serviços recusar cumprimento à oferta, apresentação ou publicidade, o consumidor poderá, alternativamente e à sua escolha: I - exigir o cumprimento forçado da obrigação, nos termos da oferta, apresentação ou publicidade; II - aceitar outro produto ou prestação de serviço equivalente; III - rescindir o contrato, com direito à restituição de quantia eventualmente antecipada, monetariamente atualizada, e a perdas e danos."
       },
       "art36": {
         "number": "Art. 36",
@@ -213,7 +213,7 @@ const CDC_CONTENT = {
       "art37": {
         "number": "Art. 37",
         "title": "Cláusulas Abusivas",
-        "content": "São nulas de pleno direito, entre outras, as cláusulas contratuais relativas ao fornecimento de produtos e serviços que:"
+        "content": "São nulas de pleno direito, entre outras, as cláusulas contratuais relativas ao fornecimento de produtos e serviços que: I - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; II - estabeleçam inversão do ônus da prova em favor do fornecedor; III - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; IV - estabeleçam inversão do ônus da prova em favor do fornecedor; V - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; VI - estabeleçam inversão do ônus da prova em favor do fornecedor; VII - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; VIII - estabeleçam inversão do ônus da prova em favor do fornecedor; IX - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; X - estabeleçam inversão do ônus da prova em favor do fornecedor."
       },
       "art38": {
         "number": "Art. 38",
@@ -223,7 +223,7 @@ const CDC_CONTENT = {
       "art39": {
         "number": "Art. 39",
         "title": "Contratos de Consumo",
-        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas: I - condicionar o fornecimento de produto ou de serviço ao fornecimento de outro produto ou serviço, bem como, sem justa causa, a limites quantitativos; II - recusar atendimento às demandas dos consumidores, na exata medida de suas disponibilidades de estoque, e, ainda, de conformidade com os usos e costumes; III - enviar ou entregar ao consumidor, sem solicitação prévia, qualquer produto, ou fornecer qualquer serviço; IV - prevalecer-se da fraqueza ou ignorância do consumidor, tendo em vista sua idade, saúde, conhecimento ou condição social, para impingir-lhe seus produtos ou serviços; V - executar serviços sem a prévia elaboração de orçamento e autorização expressa do consumidor, ressalvadas as decorrentes de práticas anteriores entre as partes; VI - repassar informação depreciativa, referente a ato praticado pelo consumidor no exercício de seus direitos; VII - colocar, no mercado de consumo, qualquer produto ou serviço em desacordo com as normas expedidas pelos órgãos oficiais competentes ou, se normas específicas não existirem, pela Associação Brasileira de Normas Técnicas ou outra entidade credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial; VIII - deixar de estipular prazo para o cumprimento de sua obrigação ou deixar a fixação de seu termo inicial a seu exclusivo critério, quando tenha interesse legítimo do consumidor na tempestividade do cumprimento; IX - recusar a venda de bens ou a prestação de serviços, diretamente a quem se disponha a adquiri-los mediante pronto pagamento, ressalvados os casos de intermediação regulados em leis especiais; X - elevar sem justa causa o preço de produtos ou serviços."
       },
       "art40": {
         "number": "Art. 40",
@@ -238,7 +238,7 @@ const CDC_CONTENT = {
       "art42": {
         "number": "Art. 42",
         "title": "Responsabilidade por Danos",
-        "content": "O fornecedor de produtos ou serviços responde pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+        "content": "O fornecedor de produtos ou serviços responde pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha: I - a substituição do produto por outro da mesma espécie, em perfeitas condições de uso; II - a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de eventuais perdas e danos; III - o abatimento proporcional do preço."
       },
       "art43": {
         "number": "Art. 43",
@@ -258,7 +258,7 @@ const CDC_CONTENT = {
       "art46": {
         "number": "Art. 46",
         "title": "Sanções Administrativas",
-        "content": "As infrações às normas de defesa do consumidor ficam sujeitas às seguintes sanções administrativas, sem prejuízo das de natureza civil, penal e das definidas em normas específicas:"
+        "content": "As infrações às normas de defesa do consumidor ficam sujeitas às seguintes sanções administrativas, sem prejuízo das de natureza civil, penal e das definidas em normas específicas: I - multa; II - apreensão de produtos; III - inutilização de produtos; IV - proibição de fabricação de produtos; V - proibição de fornecimento de produtos ou de prestação de serviços; VI - suspensão de fornecimento de produtos ou de prestação de serviços; VII - revogação de concessão ou permissão de uso; VIII - cassação de registro do produto junto ao órgão competente; IX - proibição de publicidade; X - outras sanções previstas em lei."
       },
       "art47": {
         "number": "Art. 47",
@@ -318,7 +318,7 @@ const CDC_CONTENT = {
       "art58": {
         "number": "Art. 58",
         "title": "Legitimidade para Agir",
-        "content": "Podem propor as ações previstas neste código:"
+        "content": "Podem propor as ações previstas neste código: I - o Ministério Público; II - a União, os Estados, o Distrito Federal e os Municípios; III - as autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil, autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil."
       },
       "art59": {
         "number": "Art. 59",
@@ -353,7 +353,7 @@ const CDC_CONTENT = {
       "art65": {
         "number": "Art. 65",
         "title": "Responsabilidade Solidária",
-        "content": "O comerciante é igualmente responsável, nos termos do artigo anterior, quando:"
+        "content": "O comerciante é igualmente responsável, nos termos do artigo anterior, quando: I - o fabricante, o construtor, o produtor ou o importador não puderem ser identificados; II - o produto for fornecido sem identificação clara do seu fabricante, produtor, construtor ou importador; III - não conservar adequadamente os produtos perecíveis."
       },
       "art66": {
         "number": "Art. 66",
@@ -363,7 +363,7 @@ const CDC_CONTENT = {
       "art67": {
         "number": "Art. 67",
         "title": "Vícios de Qualidade",
-        "content": "O fornecedor de serviços responde pelos vícios de qualidade que os tornem impróprios ao consumo ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+        "content": "O fornecedor de serviços responde pelos vícios de qualidade que os tornem impróprios ao consumo ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha: I - a reexecução dos serviços, sem custo adicional e quando cabível; II - a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de eventuais perdas e danos; III - o abatimento proporcional do preço."
       },
       "art68": {
         "number": "Art. 68",
@@ -378,7 +378,7 @@ const CDC_CONTENT = {
       "art70": {
         "number": "Art. 70",
         "title": "Responsabilidade do Fornecedor",
-        "content": "Os fornecedores de produtos de consumo duráveis ou não duráveis respondem solidariamente pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+        "content": "Os fornecedores de produtos de consumo duráveis ou não duráveis respondem solidariamente pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha: I - a substituição do produto por outro da mesma espécie, em perfeitas condições de uso; II - a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de eventuais perdas e danos; III - o abatimento proporcional do preço."
       },
       "art71": {
         "number": "Art. 71",
@@ -433,7 +433,7 @@ const CDC_CONTENT = {
       "art81": {
         "number": "Art. 81",
         "title": "Publicidade Abusiva",
-        "content": "Para os fins deste código, a publicidade é abusiva, dentre outras, a que:"
+        "content": "Para os fins deste código, a publicidade é abusiva, dentre outras, a que: I - seja discriminatória de qualquer natureza; II - incite à violência; III - explore o medo ou a superstição; IV - se aproveite da deficiência de julgamento e experiência da criança; V - desrespeite valores ambientais; VI - induza o consumidor a se comportar de forma prejudicial ou perigosa à sua saúde ou segurança."
       },
       "art82": {
         "number": "Art. 82",
@@ -448,22 +448,22 @@ const CDC_CONTENT = {
       "art84": {
         "number": "Art. 84",
         "title": "Responsabilidade por Informações",
-        "content": "Os fabricantes e importadores de produtos de consumo duráveis ou não duráveis são obrigados a imprimir, nas embalagens, rótulos e manuais de instrução, informações sobre:"
+        "content": "Os fabricantes e importadores de produtos de consumo duráveis ou não duráveis são obrigados a imprimir, nas embalagens, rótulos e manuais de instrução, informações sobre: I - especificação técnica; II - composição; III - prazo de validade; IV - origem; V - lote; VI - preço; VII - outros dados que por sua natureza, sejam indispensáveis para o uso adequado e seguro do produto."
       },
       "art85": {
         "number": "Art. 85",
         "title": "Informações Obrigatórias",
-        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas: I - condicionar o fornecimento de produto ou de serviço ao fornecimento de outro produto ou serviço, bem como, sem justa causa, a limites quantitativos; II - recusar atendimento às demandas dos consumidores, na exata medida de suas disponibilidades de estoque, e, ainda, de conformidade com os usos e costumes; III - enviar ou entregar ao consumidor, sem solicitação prévia, qualquer produto, ou fornecer qualquer serviço; IV - prevalecer-se da fraqueza ou ignorância do consumidor, tendo em vista sua idade, saúde, conhecimento ou condição social, para impingir-lhe seus produtos ou serviços; V - executar serviços sem a prévia elaboração de orçamento e autorização expressa do consumidor, ressalvadas as decorrentes de práticas anteriores entre as partes; VI - repassar informação depreciativa, referente a ato praticado pelo consumidor no exercício de seus direitos; VII - colocar, no mercado de consumo, qualquer produto ou serviço em desacordo com as normas expedidas pelos órgãos oficiais competentes ou, se normas específicas não existirem, pela Associação Brasileira de Normas Técnicas ou outra entidade credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial; VIII - deixar de estipular prazo para o cumprimento de sua obrigação ou deixar a fixação de seu termo inicial a seu exclusivo critério, quando tenha interesse legítimo do consumidor na tempestividade do cumprimento; IX - recusar a venda de bens ou a prestação de serviços, diretamente a quem se disponha a adquiri-los mediante pronto pagamento, ressalvados os casos de intermediação regulados em leis especiais; X - elevar sem justa causa o preço de produtos ou serviços."
       },
       "art86": {
         "number": "Art. 86",
         "title": "Práticas Abusivas",
-        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas: I - condicionar o fornecimento de produto ou de serviço ao fornecimento de outro produto ou serviço, bem como, sem justa causa, a limites quantitativos; II - recusar atendimento às demandas dos consumidores, na exata medida de suas disponibilidades de estoque, e, ainda, de conformidade com os usos e costumes; III - enviar ou entregar ao consumidor, sem solicitação prévia, qualquer produto, ou fornecer qualquer serviço; IV - prevalecer-se da fraqueza ou ignorância do consumidor, tendo em vista sua idade, saúde, conhecimento ou condição social, para impingir-lhe seus produtos ou serviços; V - executar serviços sem a prévia elaboração de orçamento e autorização expressa do consumidor, ressalvadas as decorrentes de práticas anteriores entre as partes; VI - repassar informação depreciativa, referente a ato praticado pelo consumidor no exercício de seus direitos; VII - colocar, no mercado de consumo, qualquer produto ou serviço em desacordo com as normas expedidas pelos órgãos oficiais competentes ou, se normas específicas não existirem, pela Associação Brasileira de Normas Técnicas ou outra entidade credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial; VIII - deixar de estipular prazo para o cumprimento de sua obrigação ou deixar a fixação de seu termo inicial a seu exclusivo critério, quando tenha interesse legítimo do consumidor na tempestividade do cumprimento; IX - recusar a venda de bens ou a prestação de serviços, diretamente a quem se disponha a adquiri-los mediante pronto pagamento, ressalvados os casos de intermediação regulados em leis especiais; X - elevar sem justa causa o preço de produtos ou serviços."
       },
       "art87": {
         "number": "Art. 87",
         "title": "Responsabilidade por Danos",
-        "content": "Se o fornecedor de produtos e serviços recusar cumprimento à oferta, apresentação ou publicidade, o consumidor poderá, alternativamente e à sua escolha:"
+        "content": "Se o fornecedor de produtos e serviços recusar cumprimento à oferta, apresentação ou publicidade, o consumidor poderá, alternativamente e à sua escolha: I - exigir o cumprimento forçado da obrigação, nos termos da oferta, apresentação ou publicidade; II - aceitar outro produto ou prestação de serviço equivalente; III - rescindir o contrato, com direito à restituição de quantia eventualmente antecipada, monetariamente atualizada, e a perdas e danos."
       },
       "art88": {
         "number": "Art. 88",
@@ -473,7 +473,7 @@ const CDC_CONTENT = {
       "art89": {
         "number": "Art. 89",
         "title": "Cláusulas Abusivas",
-        "content": "São nulas de pleno direito, entre outras, as cláusulas contratuais relativas ao fornecimento de produtos e serviços que:"
+        "content": "São nulas de pleno direito, entre outras, as cláusulas contratuais relativas ao fornecimento de produtos e serviços que: I - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; II - estabeleçam inversão do ônus da prova em favor do fornecedor; III - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; IV - estabeleçam inversão do ônus da prova em favor do fornecedor; V - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; VI - estabeleçam inversão do ônus da prova em favor do fornecedor; VII - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; VIII - estabeleçam inversão do ônus da prova em favor do fornecedor; IX - estabeleçam obrigações consideradas iníquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompatíveis com a boa-fé ou a equidade; X - estabeleçam inversão do ônus da prova em favor do fornecedor."
       },
       "art90": {
         "number": "Art. 90",
@@ -483,7 +483,7 @@ const CDC_CONTENT = {
       "art91": {
         "number": "Art. 91",
         "title": "Contratos de Consumo",
-        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas:"
+        "content": "É vedado ao fornecedor de produtos ou serviços, dentre outras práticas abusivas: I - condicionar o fornecimento de produto ou de serviço ao fornecimento de outro produto ou serviço, bem como, sem justa causa, a limites quantitativos; II - recusar atendimento às demandas dos consumidores, na exata medida de suas disponibilidades de estoque, e, ainda, de conformidade com os usos e costumes; III - enviar ou entregar ao consumidor, sem solicitação prévia, qualquer produto, ou fornecer qualquer serviço; IV - prevalecer-se da fraqueza ou ignorância do consumidor, tendo em vista sua idade, saúde, conhecimento ou condição social, para impingir-lhe seus produtos ou serviços; V - executar serviços sem a prévia elaboração de orçamento e autorização expressa do consumidor, ressalvadas as decorrentes de práticas anteriores entre as partes; VI - repassar informação depreciativa, referente a ato praticado pelo consumidor no exercício de seus direitos; VII - colocar, no mercado de consumo, qualquer produto ou serviço em desacordo com as normas expedidas pelos órgãos oficiais competentes ou, se normas específicas não existirem, pela Associação Brasileira de Normas Técnicas ou outra entidade credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial; VIII - deixar de estipular prazo para o cumprimento de sua obrigação ou deixar a fixação de seu termo inicial a seu exclusivo critério, quando tenha interesse legítimo do consumidor na tempestividade do cumprimento; IX - recusar a venda de bens ou a prestação de serviços, diretamente a quem se disponha a adquiri-los mediante pronto pagamento, ressalvados os casos de intermediação regulados em leis especiais; X - elevar sem justa causa o preço de produtos ou serviços."
       },
       "art92": {
         "number": "Art. 92",
@@ -498,7 +498,7 @@ const CDC_CONTENT = {
       "art94": {
         "number": "Art. 94",
         "title": "Responsabilidade por Danos",
-        "content": "O fornecedor de produtos ou serviços responde pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha:"
+        "content": "O fornecedor de produtos ou serviços responde pelos vícios de qualidade ou quantidade que os tornem impróprios ou inadequados ao consumo a que se destinam ou lhes diminuam o valor, assim como por aqueles decorrentes da disparidade com as indicações constantes da oferta e apresentação, podendo o consumidor exigir, alternativamente e à sua escolha: I - a substituição do produto por outro da mesma espécie, em perfeitas condições de uso; II - a restituição imediata da quantia paga, monetariamente atualizada, sem prejuízo de eventuais perdas e danos; III - o abatimento proporcional do preço."
       },
       "art95": {
         "number": "Art. 95",
@@ -518,7 +518,7 @@ const CDC_CONTENT = {
       "art98": {
         "number": "Art. 98",
         "title": "Sanções Administrativas",
-        "content": "As infrações às normas de defesa do consumidor ficam sujeitas às seguintes sanções administrativas, sem prejuízo das de natureza civil, penal e das definidas em normas específicas:"
+        "content": "As infrações às normas de defesa do consumidor ficam sujeitas às seguintes sanções administrativas, sem prejuízo das de natureza civil, penal e das definidas em normas específicas: I - multa; II - apreensão de produtos; III - inutilização de produtos; IV - proibição de fabricação de produtos; V - proibição de fornecimento de produtos ou de prestação de serviços; VI - suspensão de fornecimento de produtos ou de prestação de serviços; VII - revogação de concessão ou permissão de uso; VIII - cassação de registro do produto junto ao órgão competente; IX - proibição de publicidade; X - outras sanções previstas em lei."
       },
       "art99": {
         "number": "Art. 99",
@@ -578,7 +578,7 @@ const CDC_CONTENT = {
       "art110": {
         "number": "Art. 110",
         "title": "Legitimidade para Agir",
-        "content": "Podem propor as ações previstas neste código:"
+        "content": "Podem propor as ações previstas neste código: I - o Ministério Público; II - a União, os Estados, o Distrito Federal e os Municípios; III - as autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil, autarquias, empresas públicas, fundações, sociedades de economia mista ou por associação constituída há pelo menos um ano, nos termos da lei civil."
       },
       "art111": {
         "number": "Art. 111",
