@@ -3,115 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Código de Defesa do Consumidor - Lei 8.078/90</title>
-    <link rel="stylesheet" href="/site/styles.css">
+    <title>Código de Defesa do Consumidor - Lei 8.078/90 | Consulta Jurídica Online</title>
+    <meta name="description" content="Consulte o Código de Defesa do Consumidor completo com todos os 119 artigos. Lei 8.078/90 com busca avançada e navegação intuitiva.">
+    <meta name="keywords" content="Código de Defesa do Consumidor, CDC, Lei 8078, direitos do consumidor, consulta jurídica">
+    <meta name="author" content="Sistema Jurídico">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Código de Defesa do Consumidor - Lei 8.078/90">
+    <meta property="og:description" content="Consulte o CDC completo com todos os 119 artigos. Busca avançada e navegação intuitiva.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Código de Defesa do Consumidor - Lei 8.078/90">
+    <meta property="twitter:description" content="Consulte o CDC completo com todos os 119 artigos. Busca avançada e navegação intuitiva.">
+    
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/site/styles.css">
 </head>
 <body>
+    <!-- Loading Screen -->
     <div class="loading">
         <div>🔄 Verificando acesso...</div>
     </div>
 
-    <div class="cdc-container" style="display: none;">
-        <!-- Header Jurídico -->
-        <header class="header-juridico">
-            <h1>Código de Defesa do Consumidor</h1>
-            <div class="subtitle">Proteção Integral dos Direitos do Consumidor</div>
-            <div class="lei-ref">Lei nº 8.078, de 11 de setembro de 1990</div>
-        </header>
-
-        <!-- Navegação Principal -->
-        <nav class="nav-principal">
-            <div class="nav-container">
-                <a href="#" class="logo-nav">⚖️ CDC</a>
-                <ul class="nav-links">
-                    <li><a href="#inicio" class="active">Início</a></li>
-                    <li><a href="#artigos">Artigos</a></li>
-                    <li><a href="#busca">Busca</a></li>
-                </ul>
-                <button class="mobile-menu-btn">☰</button>
-            </div>
-        </nav>
-
-        <!-- Menu Mobile -->
-        <div class="nav-overlay"></div>
-        <nav class="nav-mobile">
-            <ul class="nav-links">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#artigos">Artigos</a></li>
-                <li><a href="#busca">Busca</a></li>
-            </ul>
-        </nav>
-
-        <!-- Hero Section -->
-        <section id="inicio" class="hero-section">
-            <div class="hero-content">
-                <h2>Conheça Seus Direitos</h2>
-                <p>O Código de Defesa do Consumidor estabelece normas de proteção e defesa do consumidor, garantindo equilíbrio nas relações de consumo e o respeito à dignidade, saúde e segurança dos consumidores brasileiros.</p>
-                <a href="#artigos" class="cta-button">Explorar Artigos</a>
-            </div>
-        </section>
-
-        <!-- Conteúdo Principal -->
-        <main class="main-content">
-            <div class="content-header">
-                <h2>Navegação por Capítulos</h2>
-                <p>Explore todos os 119 artigos organizados por títulos e capítulos temáticos</p>
-            </div>
-
-            <!-- Navegação de Capítulos -->
-            <div id="artigos" class="chapters-nav">
-                <div class="chapter-card" onclick="showChapter('preambulo')">
-                    <div class="chapter-number">📖</div>
-                    <h3>Preâmbulo</h3>
-                    <p>Introdução e disposições gerais sobre a proteção do consumidor</p>
-                </div>
-
-                <div class="chapter-card" onclick="showChapter('titulo1')">
-                    <div class="chapter-number">📋</div>
-                    <h3>Título I</h3>
-                    <p>Das Disposições Gerais - Arts. 1º a 6º</p>
-                </div>
-
-                <div class="chapter-card" onclick="showChapter('titulo2')">
-                    <div class="chapter-number">📋</div>
-                    <h3>Título II</h3>
-                    <p>Da Política Nacional das Relações de Consumo - Arts. 7º a 10º</p>
-                </div>
-
-                <div class="chapter-card" onclick="showChapter('titulo3')">
-                    <div class="chapter-number">📋</div>
-                    <h3>Título III</h3>
-                    <p>Dos Direitos Básicos do Consumidor - Arts. 11º a 119º</p>
-                </div>
-            </div>
-
-            <!-- Área de Conteúdo Dinâmico -->
-            <div id="content-area">
-                <!-- Conteúdo será carregado dinamicamente -->
-            </div>
-        </main>
-
-        <!-- Seção de Busca -->
-        <section id="busca" class="search-section">
-            <div class="search-container">
-                <h2>🔍 Busca no Código</h2>
-                <p>Encontre artigos específicos por palavra-chave ou número</p>
-                <input type="text" class="search-input" placeholder="Digite sua busca..." onkeyup="handleSearch(this.value)">
-                <div id="search-results" class="search-results" style="display: none;">
-                    <h3>Resultados da Busca</h3>
-                    <div class="results-list" id="results-list">
-                        <!-- Resultados serão inseridos aqui -->
+    <!-- Main Container -->
+    <div class="site-container" style="display: none;">
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" aria-label="Abrir menu">☰</button>
+        
+        <!-- Legal Header -->
+        <header class="legal-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">⚖️</div>
+                    <div class="logo-text">
+                        <h1 class="logo-title">Código de Defesa do Consumidor</h1>
+                        <p class="logo-subtitle">Lei nº 8.078, de 11 de setembro de 1990</p>
                     </div>
                 </div>
+                
+                <div class="session-info">
+                    <div class="timer-display">--:--</div>
+                    <div class="timer-label">Sessão Expira em</div>
+                </div>
             </div>
-        </section>
-
-        <!-- Footer Jurídico -->
-        <footer class="footer-juridico">
-            <p>&copy; 2024 Código de Defesa do Consumidor - Lei 8.078/90</p>
-            <p>Acesso restrito via QR Code - Sistema de Controle de Acesso</p>
-        </footer>
+        </header>
+        
+        <!-- Legal Sidebar -->
+        <aside class="legal-sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">📚 Navegação</h2>
+                <p class="sidebar-subtitle">Consulte todos os artigos do CDC</p>
+            </div>
+            
+            <div class="search-section">
+                <input type="text" class="search-input" placeholder="🔍 Buscar artigo, palavra-chave ou número..." aria-label="Buscar no Código de Defesa do Consumidor">
+            </div>
+            
+            <nav class="nav-section" role="navigation" aria-label="Navegação principal">
+                <div class="nav-title">Estrutura da Lei</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-chapter="preambulo" aria-label="Preâmbulo da lei">
+                            📖 Preâmbulo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-chapter="titulo1" aria-label="Título I - Das Disposições Gerais">
+                            📋 Título I - Das Disposições Gerais
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-chapter="titulo2" aria-label="Título II - Da Política Nacional">
+                            📋 Título II - Da Política Nacional
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-chapter="titulo3" aria-label="Título III - Dos Direitos Básicos">
+                            📋 Título III - Dos Direitos Básicos
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Overlay Mobile -->
+        <div class="sidebar-overlay" aria-hidden="true"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content" role="main">
+            <!-- Conteúdo será carregado dinamicamente -->
+        </main>
     </div>
 
     <!-- Scripts -->
