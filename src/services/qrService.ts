@@ -27,7 +27,10 @@ export class QRService {
 
   static async createQRCode(name: string): Promise<QRCodeWithImage> {
     const code = this.generateUniqueCode();
-    const accessUrl = `${process.env.ADMIN_URL || 'http://localhost:3000'}/api/access/scan/${code}`;
+    const baseUrl = process.env.RAILWAY_PUBLIC_DOMAIN 
+      ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+      : process.env.ADMIN_URL || 'http://localhost:3000';
+    const accessUrl = `${baseUrl}/api/access/scan/${code}`;
     
     try {
       const result = await pool.query(
@@ -57,7 +60,10 @@ export class QRService {
 
       const qrCodes = await Promise.all(
         result.rows.map(async (qrCode: QRCodeType) => {
-          const accessUrl = `${process.env.ADMIN_URL || 'http://localhost:3000'}/api/access/scan/${qrCode.code}`;
+          const baseUrl = process.env.RAILWAY_PUBLIC_DOMAIN 
+            ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+            : process.env.ADMIN_URL || 'http://localhost:3000';
+          const accessUrl = `${baseUrl}/api/access/scan/${qrCode.code}`;
           const qrImage = await this.generateQRCodeImage(accessUrl);
           
           return {

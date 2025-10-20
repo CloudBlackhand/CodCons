@@ -23,7 +23,10 @@ router.get('/scan/:code', async (req: Request, res: Response) => {
     const session = await SessionService.createSession(qrCode.id);
 
     // Redirecionar para o site com token de sessão
-    const siteUrl = process.env.SITE_URL || 'http://localhost:3000/site';
+    const baseUrl = process.env.RAILWAY_PUBLIC_DOMAIN 
+      ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+      : process.env.SITE_URL || 'http://localhost:3000';
+    const siteUrl = `${baseUrl}/site`;
     const redirectUrl = `${siteUrl}?token=${session.token}`;
 
     res.redirect(redirectUrl);
