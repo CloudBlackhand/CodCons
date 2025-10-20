@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Código de Defesa do Consumidor - Acesso via QR Code</title>
+    <title>Código de Defesa do Consumidor - Lei 8.078/90</title>
     <link rel="stylesheet" href="/site/styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
@@ -13,58 +13,182 @@
     </div>
 
     <div class="site-container" style="display: none;">
-        <!-- Menu Mobile -->
-        <button class="mobile-menu-btn">☰</button>
-        
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <h1>⚖️ CDC</h1>
-                <div class="subtitle">Código de Defesa do Consumidor</div>
+        <!-- Header Jurídico -->
+        <header class="header">
+            <div class="header-container">
+                <div class="header-logo">
+                    <div>
+                        <h1>⚖️ Código de Defesa do Consumidor</h1>
+                        <p class="subtitle">Lei nº 8.078, de 11 de setembro de 1990</p>
+                    </div>
+                </div>
+                <div class="session-info">
+                    <span>⏱️ Sessão expira em:</span>
+                    <span class="timer-display">--:--</span>
+                </div>
             </div>
-            
-            <div class="session-timer">
-                <div class="timer-display">--:--</div>
-                <div class="timer-label">Sessão Expira em</div>
-            </div>
-            
-            <div class="search-section">
-                <input type="text" class="search-input" placeholder="🔍 Buscar no CDC...">
-            </div>
-            
-            <nav class="nav-section">
-                <div class="nav-title">📚 Navegação</div>
+        </header>
+
+        <!-- Navegação Principal -->
+        <nav class="nav-main">
+            <div class="nav-container">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="#" class="nav-link chapter" data-chapter="preambulo">
-                            📖 Preâmbulo
+                        <a href="#" class="nav-link active" data-section="inicio">
+                            🏠 Início
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link chapter" data-chapter="titulo1">
-                            📋 Título I - Das Disposições Gerais
+                        <a href="#" class="nav-link" data-section="direitos">
+                            📋 Direitos do Consumidor
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link chapter" data-chapter="titulo2">
-                            📋 Título II - Da Política Nacional
+                        <a href="#" class="nav-link" data-section="fornecedores">
+                            🏢 Obrigações dos Fornecedores
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link chapter" data-chapter="titulo3">
-                            📋 Título III - Dos Direitos Básicos
+                        <a href="#" class="nav-link" data-section="praticas">
+                            ⚖️ Práticas Comerciais
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="sancoes">
+                            🚫 Sanções e Penalidades
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="busca">
+                            🔍 Buscar
                         </a>
                     </li>
                 </ul>
-            </nav>
-        </div>
-        
-        <!-- Overlay Mobile -->
-        <div class="sidebar-overlay"></div>
-        
-        <!-- Conteúdo Principal -->
-        <div class="main-content">
-            <!-- Conteúdo será carregado dinamicamente -->
+            </div>
+        </nav>
+
+        <!-- Container Principal -->
+        <div class="main-container">
+            <!-- Conteúdo Principal -->
+            <main class="content-main">
+                <!-- Página Inicial -->
+                <div id="inicio" class="page-section active">
+                    <div class="content-header">
+                        <h1>Bem-vindo ao Código de Defesa do Consumidor</h1>
+                        <div class="content-meta">
+                            <span>📅 Lei 8.078/90</span>
+                            <span>🇧🇷 Legislação Brasileira</span>
+                            <span>⚖️ Direito do Consumidor</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cdc-intro">
+                        <h2>📚 Sobre o CDC</h2>
+                        <p>O Código de Defesa do Consumidor (CDC) é a lei que estabelece normas de proteção e defesa do consumidor, de ordem pública e interesse social. Esta legislação garante os direitos básicos do consumidor e estabelece as obrigações dos fornecedores de produtos e serviços.</p>
+                    </div>
+
+                    <div class="cdc-section">
+                        <h3 class="section-title">🎯 Principais Direitos do Consumidor</h3>
+                        <div class="articles-grid">
+                            <div class="article-card" onclick="app.showArticle('titulo1', 'art6')">
+                                <div class="article-number">Art. 6º</div>
+                                <div class="article-title">Direitos Básicos</div>
+                                <div class="article-content">Proteção da vida, saúde e segurança; educação para o consumo; informação adequada e clara...</div>
+                            </div>
+                            <div class="article-card" onclick="app.showArticle('titulo3', 'art12')">
+                                <div class="article-number">Art. 12</div>
+                                <div class="article-title">Responsabilidade pelo Fato do Produto</div>
+                                <div class="article-content">Fabricante responde pelos danos causados por defeitos do produto...</div>
+                            </div>
+                            <div class="article-card" onclick="app.showArticle('titulo3', 'art14')">
+                                <div class="article-number">Art. 14</div>
+                                <div class="article-title">Responsabilidade pelo Fato do Serviço</div>
+                                <div class="article-content">Fornecedor de serviços responde pelos defeitos na prestação...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cdc-section">
+                        <h3 class="section-title">🏢 Obrigações dos Fornecedores</h3>
+                        <div class="articles-grid">
+                            <div class="article-card" onclick="app.showArticle('titulo3', 'art18')">
+                                <div class="article-number">Art. 18</div>
+                                <div class="article-title">Responsabilidade por Vícios</div>
+                                <div class="article-content">Fornecedores respondem por vícios de qualidade ou quantidade...</div>
+                            </div>
+                            <div class="article-card" onclick="app.showArticle('titulo3', 'art20')">
+                                <div class="article-number">Art. 20</div>
+                                <div class="article-title">Informações sobre Riscos</div>
+                                <div class="article-content">Deve informar sobre nocividade ou periculosidade de produtos...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="legal-notice">
+                        <strong>⚠️ Aviso Legal:</strong> Este site contém o texto integral do Código de Defesa do Consumidor para fins informativos. Para questões jurídicas específicas, consulte sempre um advogado especializado.
+                    </div>
+                </div>
+
+                <!-- Página de Busca -->
+                <div id="busca" class="page-section">
+                    <div class="content-header">
+                        <h1>🔍 Buscar no CDC</h1>
+                        <div class="content-meta">
+                            <span>📚 Busca em todos os artigos</span>
+                            <span>⚡ Resultados instantâneos</span>
+                        </div>
+                    </div>
+                    
+                    <div class="search-results">
+                        <div class="search-box">
+                            <input type="text" class="search-input" placeholder="Digite palavras-chave, número do artigo ou conceito..." id="searchInput">
+                        </div>
+                        <div id="searchResults"></div>
+                    </div>
+                </div>
+
+                <!-- Página de Artigo -->
+                <div id="artigo" class="page-section">
+                    <div class="article-page">
+                        <div class="article-header">
+                            <h1 class="article-page-title" id="articleTitle">Título do Artigo</h1>
+                            <div class="article-page-number" id="articleNumber">Art. XX</div>
+                        </div>
+                        <div class="article-text" id="articleContent">
+                            Conteúdo do artigo será carregado aqui...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outras seções serão carregadas dinamicamente -->
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3 class="sidebar-title">📖 Navegação Rápida</h3>
+                
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="🔍 Buscar artigo..." id="sidebarSearch">
+                </div>
+
+                <h4 class="sidebar-title">📋 Artigos Populares</h4>
+                <ul class="quick-links">
+                    <li><a href="#" onclick="app.showArticle('titulo1', 'art6')">Art. 6º - Direitos Básicos</a></li>
+                    <li><a href="#" onclick="app.showArticle('titulo3', 'art12')">Art. 12 - Responsabilidade do Produto</a></li>
+                    <li><a href="#" onclick="app.showArticle('titulo3', 'art14')">Art. 14 - Responsabilidade do Serviço</a></li>
+                    <li><a href="#" onclick="app.showArticle('titulo3', 'art18')">Art. 18 - Vícios do Produto</a></li>
+                    <li><a href="#" onclick="app.showArticle('titulo3', 'art25')">Art. 25 - Garantia Contratual</a></li>
+                    <li><a href="#" onclick="app.showArticle('titulo3', 'art35')">Art. 35 - Oferta Vinculante</a></li>
+                </ul>
+
+                <h4 class="sidebar-title">⚖️ Seções Principais</h4>
+                <ul class="quick-links">
+                    <li><a href="#" onclick="app.showSection('direitos')">Direitos do Consumidor</a></li>
+                    <li><a href="#" onclick="app.showSection('fornecedores')">Obrigações dos Fornecedores</a></li>
+                    <li><a href="#" onclick="app.showSection('praticas')">Práticas Comerciais</a></li>
+                    <li><a href="#" onclick="app.showSection('sancoes')">Sanções e Penalidades</a></li>
+                </ul>
+            </aside>
         </div>
     </div>
 

@@ -1,10 +1,10 @@
-// Aplicação principal do site CDC
+// Aplicação do Site Jurídico CDC
 class CDCApp {
   constructor() {
     this.sessionToken = null;
     this.sessionExpiry = null;
     this.timerInterval = null;
-    this.currentChapter = null;
+    this.currentSection = 'inicio';
     this.currentArticle = null;
     
     this.init();
@@ -107,15 +107,7 @@ class CDCApp {
 
   // Configurar event listeners
   setupEventListeners() {
-    // Busca
-    const searchInput = document.querySelector('.search-input');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        this.handleSearch(e.target.value);
-      });
-    }
-
-    // Navegação
+    // Navegação principal
     document.addEventListener('click', (e) => {
       if (e.target.matches('.nav-link')) {
         e.preventDefault();
@@ -123,31 +115,31 @@ class CDCApp {
       }
     });
 
-    // Menu mobile
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', () => {
-        this.toggleMobileMenu();
+    // Busca principal
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        this.handleSearch(e.target.value);
       });
     }
 
-    // Overlay mobile
-    const overlay = document.querySelector('.sidebar-overlay');
-    if (overlay) {
-      overlay.addEventListener('click', () => {
-        this.closeMobileMenu();
+    // Busca da sidebar
+    const sidebarSearch = document.getElementById('sidebarSearch');
+    if (sidebarSearch) {
+      sidebarSearch.addEventListener('input', (e) => {
+        this.handleSearch(e.target.value);
       });
     }
   }
 
   // Carregar conteúdo padrão
   loadDefaultContent() {
-    this.showChapter('preambulo');
+    this.showSection('inicio');
   }
 
   // Mostrar conteúdo principal
   showContent() {
-    document.querySelector('.site-container').style.display = 'flex';
+    document.querySelector('.site-container').style.display = 'block';
     document.querySelector('.loading')?.remove();
   }
 
@@ -168,6 +160,77 @@ class CDCApp {
     `;
   }
 
+  // Lidar com navegação
+  handleNavigation(element) {
+    const section = element.dataset.section;
+    
+    // Atualizar navegação ativa
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    element.classList.add('active');
+
+    if (section === 'busca') {
+      this.showSection('busca');
+    } else {
+      this.showSection(section);
+    }
+  }
+
+  // Mostrar seção
+  showSection(sectionKey) {
+    // Esconder todas as seções
+    document.querySelectorAll('.page-section').forEach(section => {
+      section.classList.remove('active');
+    });
+
+    // Mostrar seção selecionada
+    const targetSection = document.getElementById(sectionKey);
+    if (targetSection) {
+      targetSection.classList.add('active');
+      this.currentSection = sectionKey;
+      this.currentArticle = null;
+    }
+
+    // Se for busca, focar no input
+    if (sectionKey === 'busca') {
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.focus();
+      }
+    }
+  }
+
+  // Mostrar artigo específico
+  showArticle(chapterKey, articleKey) {
+    const article = getArticle(chapterKey, articleKey);
+    if (!article) return;
+
+    // Esconder todas as seções
+    document.querySelectorAll('.page-section').forEach(section => {
+      section.classList.remove('active');
+    });
+
+    // Mostrar seção de artigo
+    const articleSection = document.getElementById('artigo');
+    articleSection.classList.add('active');
+
+    // Atualizar conteúdo do artigo
+    document.getElementById('articleTitle').textContent = article.title;
+    document.getElementById('articleNumber').textContent = article.number;
+    document.getElementById('articleContent').innerHTML = `
+      <p>${article.content}</p>
+    `;
+
+    this.currentSection = 'artigo';
+    this.currentArticle = { chapterKey, articleKey };
+
+    // Atualizar navegação ativa
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+  }
+
   // Lidar com busca
   handleSearch(query) {
     if (!query.trim()) {
@@ -181,48 +244,46 @@ class CDCApp {
 
   // Exibir resultados da busca
   displaySearchResults(results) {
-    const mainContent = document.querySelector('.main-content');
+    const searchResults = document.getElementById('searchResults');
     
     if (results.length === 0) {
-      mainContent.innerHTML = `
-        <div class="content-header">
-          <h1>🔍 Resultados da Busca</h1>
-          <p>Nenhum resultado encontrado para "${document.querySelector('.search-input').value}"</p>
+      searchResults.innerHTML = `
+        <div class="message">
+          <h3>🔍 Nenhum resultado encontrado</h3>
+          <p>Não foram encontrados artigos para "${document.getElementById('searchInput').value}"</p>
+          <p>Tente usar termos diferentes ou números de artigos.</p>
         </div>
       `;
       return;
     }
 
     let html = `
-      <div class="content-header">
-        <h1>🔍 Resultados da Busca</h1>
-        <p>${results.length} resultado(s) encontrado(s) para "${document.querySelector('.search-input').value}"</p>
-      </div>
-      <div class="chapter-content">
-        <div class="articles-list">
+      <h2>🔍 Resultados da Busca</h2>
+      <p class="results-count">${results.length} resultado(s) encontrado(s) para "${document.getElementById('searchInput').value}"</p>
+      <div class="articles-grid">
     `;
 
     results.forEach(result => {
       html += `
         <div class="article-card" onclick="app.navigateToResult('${result.chapterKey || ''}', '${result.key || ''}')">
-          <div class="article-card-title">${result.title}</div>
-          ${result.number ? `<div class="article-card-number">${result.number}</div>` : ''}
-          <div class="article-card-content">${result.content.substring(0, 200)}...</div>
+          <div class="article-number">${result.number || ''}</div>
+          <div class="article-title">${result.title}</div>
+          <div class="article-content">${result.content.substring(0, 150)}...</div>
         </div>
       `;
     });
 
     html += `
-        </div>
       </div>
     `;
 
-    mainContent.innerHTML = html;
+    searchResults.innerHTML = html;
   }
 
   // Limpar resultados da busca
   clearSearchResults() {
-    this.loadDefaultContent();
+    const searchResults = document.getElementById('searchResults');
+    searchResults.innerHTML = '';
   }
 
   // Navegar para resultado da busca
@@ -230,141 +291,8 @@ class CDCApp {
     if (articleKey) {
       this.showArticle(chapterKey, articleKey);
     } else if (chapterKey) {
-      this.showChapter(chapterKey);
+      this.showSection(chapterKey);
     }
-  }
-
-  // Lidar com navegação
-  handleNavigation(element) {
-    const chapterKey = element.dataset.chapter;
-    const articleKey = element.dataset.article;
-
-    // Atualizar navegação ativa
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    element.classList.add('active');
-
-    if (articleKey) {
-      this.showArticle(chapterKey, articleKey);
-    } else if (chapterKey) {
-      this.showChapter(chapterKey);
-    }
-
-    this.closeMobileMenu();
-  }
-
-  // Mostrar capítulo
-  showChapter(chapterKey) {
-    const chapter = getChapter(chapterKey);
-    if (!chapter) return;
-
-    const mainContent = document.querySelector('.main-content');
-    
-    let html = `
-      <div class="content-header">
-        <h1>${chapter.title}</h1>
-        <div class="content-meta">
-          <span>📚 Código de Defesa do Consumidor</span>
-          <span>📅 Lei 8.078/90</span>
-        </div>
-      </div>
-    `;
-
-    if (chapter.content) {
-      html += `
-        <div class="article-content">
-          <div class="article-text">
-            ${chapter.content}
-          </div>
-        </div>
-      `;
-    }
-
-    if (chapter.articles) {
-      html += `
-        <div class="chapter-content">
-          <div class="articles-list">
-      `;
-
-      Object.keys(chapter.articles).forEach(articleKey => {
-        const article = chapter.articles[articleKey];
-        html += `
-          <div class="article-card" onclick="app.showArticle('${chapterKey}', '${articleKey}')">
-            <div class="article-card-title">${article.title}</div>
-            <div class="article-card-number">${article.number}</div>
-          </div>
-        `;
-      });
-
-      html += `
-          </div>
-        </div>
-      `;
-    }
-
-    mainContent.innerHTML = html;
-    this.currentChapter = chapterKey;
-    this.currentArticle = null;
-  }
-
-  // Mostrar artigo
-  showArticle(chapterKey, articleKey) {
-    const article = getArticle(chapterKey, articleKey);
-    if (!article) return;
-
-    const mainContent = document.querySelector('.main-content');
-    
-    const html = `
-      <div class="content-header">
-        <h1>${article.title}</h1>
-        <div class="content-meta">
-          <span>📚 ${getChapter(chapterKey).title}</span>
-          <span>📅 Lei 8.078/90</span>
-        </div>
-      </div>
-      <div class="article-content">
-        <div class="article-header">
-          <h2 class="article-title">${article.title}</h2>
-          <span class="article-number">${article.number}</span>
-        </div>
-        <div class="article-text">
-          ${article.content}
-        </div>
-      </div>
-    `;
-
-    mainContent.innerHTML = html;
-    this.currentChapter = chapterKey;
-    this.currentArticle = articleKey;
-
-    // Atualizar navegação ativa
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    
-    const activeLink = document.querySelector(`[data-chapter="${chapterKey}"][data-article="${articleKey}"]`);
-    if (activeLink) {
-      activeLink.classList.add('active');
-    }
-  }
-
-  // Toggle menu mobile
-  toggleMobileMenu() {
-    const sidebar = document.querySelector('.sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
-    
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('open');
-  }
-
-  // Fechar menu mobile
-  closeMobileMenu() {
-    const sidebar = document.querySelector('.sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
-    
-    sidebar.classList.remove('open');
-    overlay.classList.remove('open');
   }
 }
 
