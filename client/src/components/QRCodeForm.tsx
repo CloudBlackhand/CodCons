@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState, FC, FormEvent } from 'react';
 import { apiClient, CreateQRCodeRequest } from '../api/client';
 
 interface QRCodeFormProps {
   onQRCodeCreated: () => void;
 }
 
-export const QRCodeForm: React.FC<QRCodeFormProps> = ({ onQRCodeCreated }) => {
+export const QRCodeForm: FC<QRCodeFormProps> = ({ onQRCodeCreated }) => {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (!name.trim()) {

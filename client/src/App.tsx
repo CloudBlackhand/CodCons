@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { QRCode, apiClient } from './api/client';
 import { QRCodeForm } from './components/QRCodeForm';
 import { QRCodeCard } from './components/QRCodeCard';

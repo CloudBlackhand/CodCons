@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { QRCode } from '../api/client';
 
 interface QRCodeCardProps {
@@ -7,7 +7,7 @@ interface QRCodeCardProps {
   onDelete: (id: string) => void;
 }
 
-export const QRCodeCard: React.FC<QRCodeCardProps> = ({ qrCode, onUpdateStatus, onDelete }) => {
+export const QRCodeCard: FC<QRCodeCardProps> = ({ qrCode, onUpdateStatus, onDelete }) => {
   const handleStatusToggle = () => {
     const newStatus = qrCode.status === 'active' ? 'blocked' : 'active';
     onUpdateStatus(qrCode.id, newStatus);
