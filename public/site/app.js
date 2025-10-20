@@ -1,11 +1,11 @@
-// Aplicação principal do site CDC
-class CDCApp {
+// Aplicação principal do site CDC - Landing Page Jurídica
+class CDCLandingPage {
   constructor() {
     this.sessionToken = null;
     this.sessionExpiry = null;
     this.timerInterval = null;
-    this.currentChapter = null;
-    this.currentArticle = null;
+    this.allArticles = [];
+    this.filteredArticles = [];
     
     this.init();
   }
@@ -13,7 +13,7 @@ class CDCApp {
   init() {
     this.checkSession();
     this.setupEventListeners();
-    this.loadDefaultContent();
+    this.loadAllArticles();
   }
 
   // Verificar sessão atual
@@ -114,35 +114,31 @@ class CDCApp {
         this.handleSearch(e.target.value);
       });
     }
-
-    // Navegação
-    document.addEventListener('click', (e) => {
-      if (e.target.matches('.nav-link')) {
-        e.preventDefault();
-        this.handleNavigation(e.target);
-      }
-    });
-
-    // Menu mobile
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', () => {
-        this.toggleMobileMenu();
-      });
-    }
-
-    // Overlay mobile
-    const overlay = document.querySelector('.sidebar-overlay');
-    if (overlay) {
-      overlay.addEventListener('click', () => {
-        this.closeMobileMenu();
-      });
-    }
   }
 
-  // Carregar conteúdo padrão
-  loadDefaultContent() {
-    this.showChapter('preambulo');
+  // Carregar todos os artigos
+  loadAllArticles() {
+    this.allArticles = [];
+    
+    // Extrair todos os artigos do CDC_CONTENT
+    Object.keys(CDC_CONTENT).forEach(chapterKey => {
+      const chapter = CDC_CONTENT[chapterKey];
+      
+      if (chapter.articles) {
+        Object.keys(chapter.articles).forEach(articleKey => {
+          const article = chapter.articles[articleKey];
+          this.allArticles.push({
+            ...article,
+            chapterKey,
+            chapterTitle: chapter.title
+          });
+        });
+      }
+    });
+    
+    this.filteredArticles = [...this.allArticles];
+    this.renderArticles();
+    this.renderChapters();
   }
 
   // Mostrar conteúdo principal
@@ -155,11 +151,11 @@ class CDCApp {
   showError(message) {
     const container = document.querySelector('.site-container');
     container.innerHTML = `
-      <div class="message error">
+      <div class="error">
         <h2>🚫 Acesso Negado</h2>
         <p>${message}</p>
         <p><strong>Instruções:</strong></p>
-        <ul>
+        <ul style="text-align: left; display: inline-block;">
           <li>Escaneie o QR code novamente</li>
           <li>Certifique-se de que o QR code está ativo</li>
           <li>Entre em contato com o administrador se o problema persistir</li>
@@ -171,212 +167,132 @@ class CDCApp {
   // Lidar com busca
   handleSearch(query) {
     if (!query.trim()) {
-      this.clearSearchResults();
+      this.clearSearch();
       return;
     }
 
-    const results = searchCDCContent(query);
-    this.displaySearchResults(results);
+    const searchTerm = query.toLowerCase();
+    this.filteredArticles = this.allArticles.filter(article => {
+      return (
+        article.title.toLowerCase().includes(searchTerm) ||
+        article.content.toLowerCase().includes(searchTerm) ||
+        article.number.toLowerCase().includes(searchTerm) ||
+        article.chapterTitle.toLowerCase().includes(searchTerm)
+      );
+    });
+
+    this.displaySearchResults();
   }
 
   // Exibir resultados da busca
-  displaySearchResults(results) {
-    const mainContent = document.querySelector('.main-content');
-    
-    if (results.length === 0) {
-      mainContent.innerHTML = `
-        <div class="content-header">
-          <h1>🔍 Resultados da Busca</h1>
-          <p>Nenhum resultado encontrado para "${document.querySelector('.search-input').value}"</p>
+  displaySearchResults() {
+    const searchResults = document.getElementById('search-results');
+    const searchResultsGrid = document.getElementById('search-results-grid');
+    const articlesSection = document.querySelector('.articles-section');
+    const chaptersSection = document.querySelector('.chapters-section');
+
+    if (this.filteredArticles.length === 0) {
+      searchResultsGrid.innerHTML = `
+        <div class="no-results">
+          <h3>Nenhum resultado encontrado</h3>
+          <p>Tente usar outras palavras-chave ou navegue pelos capítulos abaixo</p>
         </div>
       `;
-      return;
+    } else {
+      searchResultsGrid.innerHTML = this.filteredArticles.map(article => 
+        this.createArticleCard(article)
+      ).join('');
     }
 
-    let html = `
-      <div class="content-header">
-        <h1>🔍 Resultados da Busca</h1>
-        <p>${results.length} resultado(s) encontrado(s) para "${document.querySelector('.search-input').value}"</p>
-      </div>
-      <div class="chapter-content">
-        <div class="articles-list">
-    `;
-
-    results.forEach(result => {
-      html += `
-        <div class="article-card" onclick="app.navigateToResult('${result.chapterKey || ''}', '${result.key || ''}')">
-          <div class="article-card-title">${result.title}</div>
-          ${result.number ? `<div class="article-card-number">${result.number}</div>` : ''}
-          <div class="article-card-content">${result.content.substring(0, 200)}...</div>
-        </div>
-      `;
-    });
-
-    html += `
-        </div>
-      </div>
-    `;
-
-    mainContent.innerHTML = html;
+    searchResults.style.display = 'block';
+    articlesSection.style.display = 'none';
+    chaptersSection.style.display = 'none';
   }
 
-  // Limpar resultados da busca
-  clearSearchResults() {
-    this.loadDefaultContent();
-  }
+  // Limpar busca
+  clearSearch() {
+    const searchResults = document.getElementById('search-results');
+    const articlesSection = document.querySelector('.articles-section');
+    const chaptersSection = document.querySelector('.chapters-section');
 
-  // Navegar para resultado da busca
-  navigateToResult(chapterKey, articleKey) {
-    if (articleKey) {
-      this.showArticle(chapterKey, articleKey);
-    } else if (chapterKey) {
-      this.showChapter(chapterKey);
-    }
-  }
-
-  // Lidar com navegação
-  handleNavigation(element) {
-    const chapterKey = element.dataset.chapter;
-    const articleKey = element.dataset.article;
-
-    // Atualizar navegação ativa
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    element.classList.add('active');
-
-    if (articleKey) {
-      this.showArticle(chapterKey, articleKey);
-    } else if (chapterKey) {
-      this.showChapter(chapterKey);
-    }
-
-    this.closeMobileMenu();
-  }
-
-  // Mostrar capítulo
-  showChapter(chapterKey) {
-    const chapter = getChapter(chapterKey);
-    if (!chapter) return;
-
-    const mainContent = document.querySelector('.main-content');
+    searchResults.style.display = 'none';
+    articlesSection.style.display = 'block';
+    chaptersSection.style.display = 'block';
     
-    let html = `
-      <div class="content-header">
-        <h1 class="content-title">${chapter.title}</h1>
-        <div class="content-meta">
-          <span>📚 Código de Defesa do Consumidor</span>
-          <span>📅 Lei 8.078/90</span>
-          <span>📖 ${Object.keys(chapter.articles || {}).length} artigos</span>
-        </div>
+    this.filteredArticles = [...this.allArticles];
+  }
+
+  // Renderizar artigos
+  renderArticles() {
+    const articlesGrid = document.getElementById('articles-grid');
+    articlesGrid.innerHTML = this.allArticles.map(article => 
+      this.createArticleCard(article)
+    ).join('');
+  }
+
+  // Criar card de artigo
+  createArticleCard(article) {
+    const contentPreview = article.content.length > 200 
+      ? article.content.substring(0, 200) + '...'
+      : article.content;
+
+    return `
+      <div class="article-card" onclick="app.scrollToArticle('${article.chapterKey}', '${article.number}')">
+        <div class="article-number">${article.number}</div>
+        <div class="article-title">${article.title}</div>
+        <div class="article-content">${contentPreview}</div>
       </div>
     `;
-
-    if (chapter.content) {
-      html += `
-        <div class="article-content">
-          <div class="article-header">
-            <h2 class="article-title">${chapter.title}</h2>
-          </div>
-          <div class="article-text">
-            ${chapter.content}
-          </div>
-        </div>
-      `;
-    }
-
-    if (chapter.articles) {
-      html += `
-        <div class="articles-grid">
-      `;
-
-      Object.keys(chapter.articles).forEach(articleKey => {
-        const article = chapter.articles[articleKey];
-        html += `
-          <div class="article-card" onclick="app.showArticle('${chapterKey}', '${articleKey}')">
-            <div class="article-card-header">
-              <div class="article-card-number">${article.number}</div>
-              <div class="article-card-title">${article.title}</div>
-            </div>
-            <div class="article-card-content">
-              ${article.content.substring(0, 150)}...
-            </div>
-          </div>
-        `;
-      });
-
-      html += `
-        </div>
-      `;
-    }
-
-    mainContent.innerHTML = html;
-    this.currentChapter = chapterKey;
-    this.currentArticle = null;
   }
 
-  // Mostrar artigo
-  showArticle(chapterKey, articleKey) {
-    const article = getArticle(chapterKey, articleKey);
-    if (!article) return;
-
-    const mainContent = document.querySelector('.main-content');
+  // Renderizar capítulos
+  renderChapters() {
+    const chaptersGrid = document.getElementById('chapters-grid');
     
-    const html = `
-      <div class="content-header">
-        <h1 class="content-title">${article.title}</h1>
-        <div class="content-meta">
-          <span>📚 ${getChapter(chapterKey).title}</span>
-          <span>📅 Lei 8.078/90</span>
-          <span>⚖️ Código de Defesa do Consumidor</span>
+    const chapters = [
+      {
+        title: '📋 Título I - Das Disposições Gerais',
+        description: 'Artigos 1º a 6º - Objetivo, definições e princípios fundamentais',
+        articles: this.allArticles.filter(a => a.chapterKey === 'titulo1').length
+      },
+      {
+        title: '📋 Título II - Da Política Nacional',
+        description: 'Artigos 7º a 10º - Política nacional das relações de consumo',
+        articles: this.allArticles.filter(a => a.chapterKey === 'titulo2').length
+      },
+      {
+        title: '📋 Título III - Dos Direitos Básicos',
+        description: 'Artigos 11º a 119º - Direitos básicos e responsabilidades',
+        articles: this.allArticles.filter(a => a.chapterKey === 'titulo3').length
+      }
+    ];
+
+    chaptersGrid.innerHTML = chapters.map(chapter => `
+      <div class="chapter-card" onclick="app.filterByChapter('${chapter.title}')">
+        <div class="chapter-title">${chapter.title}</div>
+        <div class="chapter-description">${chapter.description}</div>
+        <div style="margin-top: 10px; font-size: 0.9rem; color: #3b82f6; font-weight: 500;">
+          ${chapter.articles} artigos
         </div>
       </div>
-      <div class="article-content">
-        <div class="article-header">
-          <h2 class="article-title">${article.title}</h2>
-          <span class="article-number">${article.number}</span>
-        </div>
-        <div class="article-text">
-          <p>${article.content}</p>
-        </div>
-      </div>
-    `;
-
-    mainContent.innerHTML = html;
-    this.currentChapter = chapterKey;
-    this.currentArticle = articleKey;
-
-    // Atualizar navegação ativa
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    
-    const activeLink = document.querySelector(`[data-chapter="${chapterKey}"]`);
-    if (activeLink) {
-      activeLink.classList.add('active');
-    }
+    `).join('');
   }
 
-  // Toggle menu mobile
-  toggleMobileMenu() {
-    const sidebar = document.querySelector('.legal-sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
-    
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('open');
+  // Filtrar por capítulo
+  filterByChapter(chapterTitle) {
+    const searchInput = document.querySelector('.search-input');
+    searchInput.value = chapterTitle;
+    this.handleSearch(chapterTitle);
   }
 
-  // Fechar menu mobile
-  closeMobileMenu() {
-    const sidebar = document.querySelector('.legal-sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
-    
-    sidebar.classList.remove('open');
-    overlay.classList.remove('open');
+  // Scroll para artigo específico
+  scrollToArticle(chapterKey, articleNumber) {
+    // Implementar scroll suave para o artigo
+    console.log(`Scroll para ${articleNumber} do ${chapterKey}`);
   }
 }
 
 // Inicializar aplicação quando DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-  window.app = new CDCApp();
+  window.app = new CDCLandingPage();
 });
